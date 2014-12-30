@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/adminCommon.xhtml">
+
+    <ui:define name="mainContent">
+        <div id="innerContent">
+            <h:panelGroup layout="block" class="errorBox" rendered="#{param['error'] != null}">
+                Zadali jste špatné přihlašovací údaje. Zkuste to prosím znovu.
+            </h:panelGroup>
+
+            <ui:insert name="innerContent">
+                [Template content will be inserted here]
+            </ui:insert>
+        </div>
+    </ui:define>
+</ui:composition>

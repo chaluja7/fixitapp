@@ -1,0 +1,312 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, sans-serif;
+    background-color: #404040;
+    color: #ffffff;
+}
+
+body a {
+    color: #ffffff;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #ffffff;
+}
+
+#content {
+    margin-top: 65px;
+    position: relative;
+}
+
+#footer {
+    clear: both;
+    text-align: center;
+    color: #666666;
+    font-size: 0.85em;
+    padding: 3em 0 0 0;
+}
+
+#topBar {
+    position: fixed;
+    top: 0px;
+    box-sizing: border-box;
+    height: 60px;
+    padding: 10px;
+    width: 100%;
+    background-color: #1abc6e;
+    box-shadow: black 0px 4px 15px;
+    -webkit-box-shadow: black 0px 4px 15px;
+    -moz-box-shadow: black 0px 4px 15px;
+    margin-bottom: 5px;
+    z-index: 99;
+}
+
+#topBar a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+#topBar h1 {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    display: inline-block;
+}
+
+#topMenu {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#topMenu ul {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#topMenu li {
+    display: inline;
+}
+
+#topMenu a {
+    padding-right: 10px;
+}
+
+#topMenu a:hover {
+    font-weight: bold;
+}
+
+#content {
+    margin-top: 65px;
+    position: relative;
+}
+
+#innerContent {
+    width: 1000px;
+    margin: 0px auto;
+    padding-top: 10px;
+}
+
+#innerContentLandscape {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.errorBox {
+    border: 1px solid darkred;
+    padding: 10px;
+    background-color: lightpink;
+    color: red;
+    margin-top: 10px;
+}
+
+ul.errorJsf {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.errorJsf li {
+    display: block;
+    border: 1px solid darkred;
+    padding: 10px;
+    background-color: lightpink;
+    color: red;
+    margin-top: 10px;
+}
+
+.inputRowBasic {
+    padding: 10px 0 10px 0;
+}
+
+.inputRowBasic label {
+    width: 85px;
+    display: inline-block;
+}
+
+.inputRowBasic * {
+    vertical-align: middle;
+}
+
+.inputRowBasic input[type="text"] {
+    width: 120px;
+    padding: 0;
+    height: 25px;
+    font-size: 18px;
+}
+
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+#tableData {
+    color: #000000;
+    padding: 10px;
+    width: 100%;
+    border-width: 3px;
+    background: rgb(243, 244, 248);
+    box-shadow: black 0px 15px 15px;
+    -webkit-box-shadow: black 0px 15px 15px;
+    -moz-box-shadow: black 0px 15px 15px;
+}
+
+#tableData a {
+    color: #000000;
+}
+
+#dataTableList {
+    width: 100%;
+}
+
+.inputRow {
+    padding: 10px 0 10px 0;
+}
+
+.inputRow * {
+    vertical-align: middle;
+}
+
+.inputRowHint {
+    font-size: 8px;
+}
+
+.inputRowHelp {
+    font-size: 10px;
+}
+
+.inputRow input[type="text"],.inputRow input[type="file"],.inputRow input[type="password"], select,.inputRow textarea {
+    width: 400px;
+    padding: 0;
+}
+
+.inputRow input[type="text"], .inputRow input[type="password"] {
+    height: 25px;
+    font-size: 16px;
+}
+
+ select {
+    height: 25px;
+    line-height: 25px;
+    background: #f4f4f4;
+    font-size: 14px;
+}
+
+.inputRow textarea {
+    height: 80px;
+}
+
+.inputRow label {
+    display: inline-block;
+    width: 150px;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+input[type="submit"].submitButton {
+    background-color: #1abc6e;
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+    border: 0;
+    width: 555px;
+    margin-top: 10px;
+}
+
+input[type="submit"].deleteButton {
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    border: 0;
+    width: 555px;
+    margin-top: 10px;
+    background-color: lightpink;
+    color: red;
+}
+
+input[type="submit"].deleteOneButton {
+    background-color: lightpink;
+    border: 0;
+    border-radius: 6px;
+    color: red;
+}
+
+.dangerZone {
+    height: 2px;
+    background-color: red;
+    margin: 100px 0 0 0;
+    width: 100%;
+}
+
+.centerBox {
+    text-align: center;
+}
+
+a.simpleLink {
+    text-decoration: none;
+}
+
+
+th, td {
+    padding: 10px;
+}
+
+.rf-cal {
+    color: #000000;
+}
+
+#searchRideForm {
+    margin-top: 60px;
+}
+
+.stationSelect {
+    width: 246px;
+    height: 25px;
+    font-size: 18px;
+}
+
+.stationSwap {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.searchStationFields {
+    margin-bottom: 25px;
+}
+
+.searchStationFields * {
+    vertical-align: middle;
+}
+
+.ui-datepicker-trigger {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.searchResultTableWrapper {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid white;
+}
+
+.searchResultTableWrapper table {
+    width: 100%;
+}
+
+.searchResultTableWrapper table th {
+    text-align: left;
+}
+
+.searchResultTime {
+    margin-top: 30px;
+    font-size: 12px;
+}

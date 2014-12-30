@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jee="http://cz.cvut.jee/facelets"
+                template="/WEB-INF/templates/adminDefault.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{regionBB.id}"/>
+        <f:event type="preRenderView" listener="#{regionBB.loadRegion}"/>
+    </f:metadata>
+
+    <ui:define name="innerContent">
+
+        <h:messages styleClass="errorJsf"/>
+        <h2><h:outputText value="Přidání nového regionu" rendered="#{regionBB.id == null}" /></h2>
+        <h2><h:outputText value="Editace regionu" rendered="#{regionBB.id != null}" /></h2>
+
+        <h:form>
+
+            <jee:inputText value="#{regionBB.region.name}" title="name" label="#{msg['region.name']}" />
+
+            <h:commandButton value="Vytvořit" action="#{regionBB.saveRegion}" rendered="#{regionBB.id == null}" styleClass="submitButton"/>
+            <h:commandButton value="Uložit" action="#{regionBB.updateRegion}"  rendered="#{regionBB.id != null}" styleClass="submitButton"/>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
