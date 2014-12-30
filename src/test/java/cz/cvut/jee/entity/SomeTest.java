@@ -49,7 +49,7 @@ public class SomeTest {
     @Test
     public void testSomething() {
         Person person = new Person();
-        person.setEmail("neco@aa.cz");
+        person.setUsername("neco@aa.cz");
         person.setName("Pepa");
         person.setSurname("Novak");
         person.setPassword("xxxyyy");
@@ -57,7 +57,7 @@ public class SomeTest {
         em.persist(person);
         Person p = em.find(Person.class, person.getId());
 
-        Assert.assertEquals(person.getEmail(), p.getEmail());
+        Assert.assertEquals(person.getUsername(), p.getUsername());
         Assert.assertEquals(person.getName(), p.getName());
     }
 

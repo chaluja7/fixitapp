@@ -36,4 +36,35 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>fixitapp-jaas-realm</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/login.xhtml?error=true</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-constraint>
+        <display-name>pages_auth</display-name>
+        <web-resource-collection>
+            <web-resource-name>pages_auth</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>OFFICER</role-name>
+            <role-name>REGION_ADMIN</role-name>
+            <role-name>SUPER_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-role>
+        <role-name>OFFICER</role-name>
+    </security-role>
+    <security-role>
+        <role-name>REGION_ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <role-name>SUPER_ADMIN</role-name>
+    </security-role>
+
 </web-app>

@@ -26,3 +26,17 @@ module add --name=org.postgresql --resources=~/Downloads/postgresql-9.1-903.jdbc
 </xa-datasource>
 
 --a databáze jede :)
+
+--Zbývá nastavit security-domain
+--do standalone.xml přidáme na příslušné místo
+<security-domain name="fixitapp-jaas-realm">
+    <authentication>
+        <login-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:jboss/datasources/AppXADS"/>
+            <module-option name="principalsQuery" value="select password from person where username=?"/>
+            <module-option name="rolesQuery" value="select role, 'Roles' from person where username=?"/>
+            <module-option name="hashAlgorithm" value="SHA-256"/>
+            <module-option name="hashEncoding" value="base64"/>
+        </login-module>
+    </authentication>
+</security-domain>

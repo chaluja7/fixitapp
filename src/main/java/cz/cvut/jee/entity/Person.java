@@ -1,6 +1,5 @@
 package cz.cvut.jee.entity;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,9 +19,9 @@ import java.util.List;
 public class Person extends AbstractEntity {
 
     @Column(unique = true)
+    @Length(min = 3)
     @NotBlank
-    @Email
-    private String email;
+    private String username;
 
     @Column(length = 255)
     @NotBlank
@@ -52,12 +51,12 @@ public class Person extends AbstractEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "author")
     private List<Comment> comments;
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

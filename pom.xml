@@ -184,6 +184,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- pokud bude na openshiftu problem s mistem tak tohle vyhod -->
+        <dependency>
+            <groupId>org.jboss.jbossas</groupId>
+            <artifactId>jboss-as-security</artifactId>
+            <version>6.1.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
