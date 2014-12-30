@@ -58,6 +58,7 @@ public class SomeTest {
         Person p = em.find(Person.class, person.getId());
 
         Assert.assertEquals(person.getEmail(), p.getEmail());
+        Assert.assertEquals(person.getName(), p.getName());
     }
 
 }
