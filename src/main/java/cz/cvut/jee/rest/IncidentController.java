@@ -3,6 +3,8 @@ package cz.cvut.jee.rest;
 
 import cz.cvut.jee.entity.Incident;
 import cz.cvut.jee.rest.model.SimpleIncident;
+import cz.cvut.jee.rest.model.list.DataTableResource;
+import cz.cvut.jee.rest.model.list.ListIncident;
 import cz.cvut.jee.service.IncidentService;
 import cz.cvut.jee.utils.dateTime.JEEDateTimeUtils;
 
@@ -45,5 +47,28 @@ public class IncidentController {
 
         return simpleIncidentList;
     }
+
+    @GET
+    @Produces("application/json;charset=UTF-8")
+    @Path("/list")
+    public DataTableResource<ListIncident> getIncidentsList() {
+        List<ListIncident> resourceList = new ArrayList<>();
+
+        for(Incident incident : incidentService.findAllForCurrentUser()) {
+            ListIncident resource = new ListIncident();
+            resource.setId(incident.getId());
+            resource.setTitle(incident.getTitle());
+            resource.setAddress(incident.getAddress());
+            resource.setState(incident.getState().name());
+            resource.setTimeOfCreation(incident.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
+
+            resourceList.add(resource);
+        }
+
+        return new DataTableResource<>(resourceList);
+    }
+
+
+
 
 }

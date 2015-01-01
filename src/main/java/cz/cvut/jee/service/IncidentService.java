@@ -1,6 +1,7 @@
 package cz.cvut.jee.service;
 
 import cz.cvut.jee.entity.Incident;
+import cz.cvut.jee.entity.IncidentState;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -40,4 +41,24 @@ public interface IncidentService {
      * @return all incidents
      */
     public List<Incident> findAll();
+
+    /**
+     * updates incident state
+     * @param id id of incident to update state
+     * @param state new state
+     */
+    public void updateState(long id, IncidentState state);
+
+    /**
+     * finds incident with lazy initialized dependencies.
+     * @param id incident id
+     * @return incident by id
+     */
+    public Incident findIncidentLazyInitialized(long id);
+
+    /**
+     * @return all incidents available to currently logged user
+     */
+    public List<Incident> findAllForCurrentUser();
+
 }

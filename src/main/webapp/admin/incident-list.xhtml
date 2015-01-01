@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/adminDefaultLandscape.xhtml">
+
+    <ui:define name="scripts">
+        <h:outputScript library="js" name="incidentList.js" />
+    </ui:define>
+
+    <ui:define name="innerContent">
+
+        <h3>#{msg['incident.incidents']}</h3>
+
+        <table id="tableData"><tr><td>
+            <table id="dataTableList" class="display">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Popis</th>
+                    <th>Stav</th>
+                    <th>Adresa</th>
+                    <th>Datum nahlášení</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Popis</th>
+                    <th>Stav</th>
+                    <th>Adresa</th>
+                    <th>Datum nahlášení</th>
+                </tr>
+                </tfoot>
+            </table>
+        </td></tr></table>
+
+    </ui:define>
+
+</ui:composition>

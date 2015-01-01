@@ -16,7 +16,7 @@
 
   ``/subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)``
 
-* nakonec musíš přidat vlastní datasource. Nějak se mi to v WF 8.1 nepodařilo nastavit přes cli tak to hoď rovnou do standalone.xml. Přijde to do ``<datasources>`` a samozřejmě si případně jednotlivé atributy změň.
+* nakonec musíš přidat vlastní datasource. Nějak se mi to v WF 8.1 nepodařilo nastavit přes cli tak to hoď rovnou do standalone.xml. Přijde to do ``<datasources>`` a samozřejmě si případně jednotlivé atributy změň. Před úpravou standalone.xml je žádoucí server vypnout.
 
   ```xml
   <xa-datasource jndi-name="java:jboss/datasources/AppXADS" pool-name="AppXADS" enabled="true">

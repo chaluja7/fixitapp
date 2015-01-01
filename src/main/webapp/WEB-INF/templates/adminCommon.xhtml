@@ -5,10 +5,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-    <title>NSS</title>
+    <title>Fix it!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css" />
     <h:outputStylesheet name="css/styles.css" />
 
+    <h:outputScript library="js" name="jquery/jquery-2.1.1.min.js" />
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+    <h:outputScript library="js" name="dataTablesSettings.js" />
     <ui:insert name="scripts"></ui:insert>
 </h:head>
 
@@ -18,10 +22,22 @@
         <h1><h:link value="Fix it" outcome="/admin/index.xhtml" /></h1>
         <div id="topMenu">
             <ul>
-                <li><h:link value="Region" outcome="/admin/region.xhtml" /></li>
-                <li><a href="#{facesContext.externalContext.requestContextPath}/j_security_logout">Odhlásit</a></li>
+                <li><h:link value="Incidenty" outcome="/admin/incident-list.xhtml" /></li>
+                <li><h:link value="Regiony" outcome="/admin/region.xhtml" /></li>
             </ul>
         </div>
+
+        <h:form id="topRightMenu">
+            <ul>
+                <li>
+                    #{msg['login.loggedUser']}:&nbsp;
+                    <h:link value="#{loginBB.currentUsername}" outcome="/admin/incident.xhtml?id=#{loginBB.currentUserId}" />
+                </li>
+                <li>|</li>
+                <li><h:commandLink value="Odhlásit" action="#{loginBB.logout}"/></li>
+            </ul>
+
+        </h:form>
     </div>
 
     <div id="content">

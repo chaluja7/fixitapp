@@ -2,6 +2,7 @@ package cz.cvut.jee.service;
 
 import cz.cvut.jee.dao.CommentDao;
 import cz.cvut.jee.entity.Comment;
+import cz.cvut.jee.utils.security.SecurityUtil;
 import org.joda.time.LocalDateTime;
 
 import javax.ejb.Singleton;
@@ -21,6 +22,9 @@ public class CommentServiceImpl implements CommentService {
     @Inject
     protected CommentDao commentDao;
 
+    @Inject
+    protected SecurityUtil securityUtil;
+
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Comment findComment(long id) {
@@ -35,6 +39,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void createComment(Comment comment) {
         comment.setInsertedTime(new LocalDateTime());
+        comment.setAuthor(securityUtil.getCurrentUser());
+
         commentDao.create(comment);
     }
 

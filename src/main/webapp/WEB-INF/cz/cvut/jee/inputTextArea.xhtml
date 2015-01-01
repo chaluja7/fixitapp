@@ -11,7 +11,7 @@
         <label for="#{title}">#{label}:</label>
 
         <c:if test="#{readonly == null || readonly == false}">
-            <h:inputText value="#{value}" id="#{title}" label="#{label}"/>
+            <h:inputTextarea value="#{value}" id="#{title}" label="#{label}"/>
         </c:if>
         <c:otherwise>
             <span id="#{title}">#{value}</span>

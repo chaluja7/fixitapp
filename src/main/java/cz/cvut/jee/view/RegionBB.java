@@ -9,6 +9,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 
 /**
+ * Backing bean for region.
+ *
  * @author jakubchalupa
  * @since 29.12.14
  */

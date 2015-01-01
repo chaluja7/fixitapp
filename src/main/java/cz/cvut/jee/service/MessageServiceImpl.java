@@ -2,6 +2,7 @@ package cz.cvut.jee.service;
 
 import cz.cvut.jee.dao.MessageDao;
 import cz.cvut.jee.entity.Message;
+import cz.cvut.jee.utils.security.SecurityUtil;
 import org.joda.time.LocalDateTime;
 
 import javax.ejb.Singleton;
@@ -21,6 +22,9 @@ public class MessageServiceImpl implements MessageService {
     @Inject
     protected MessageDao messageDao;
 
+    @Inject
+    protected SecurityUtil securityUtil;
+
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Message findMessage(long id) {
@@ -35,6 +39,8 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void createMessage(Message message) {
         message.setInsertedTime(new LocalDateTime());
+        message.setAuthor(securityUtil.getCurrentUser());
+
         messageDao.create(message);
     }
 

@@ -6,19 +6,19 @@
 
     <ui:define name="innerContent">
 
-        <h3>Přihlášení do administrace</h3>
+        <h3>#{msg['login.title']}</h3>
 
         <form action="j_security_check" method="post">
             <h:panelGroup layout="block" styleClass="inputRow">
-                <label for="username">Login:</label>
+                <label for="username">#{msg['login.login']}:</label>
                 <input type="text" name="j_username" id="username"/>
             </h:panelGroup>
             <h:panelGroup layout="block" styleClass="inputRow">
-                <label for="password">Heslo:</label>
+                <label for="password">#{msg['login.password']}:</label>
                 <input type="password" name="j_password" id="password" />
             </h:panelGroup>
 
-            <input type="submit" name="submit" value="Přihlásit" class="submitButton" />
+            <input type="submit" name="submit" value="#{msg['login.doLogin']}" class="submitButton" />
 
         </form>
 

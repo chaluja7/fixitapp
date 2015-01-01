@@ -44,8 +44,8 @@
             <form-error-page>/login.xhtml?error=true</form-error-page>
         </form-login-config>
     </login-config>
+
     <security-constraint>
-        <display-name>pages_auth</display-name>
         <web-resource-collection>
             <web-resource-name>pages_auth</web-resource-name>
             <url-pattern>/admin/*</url-pattern>

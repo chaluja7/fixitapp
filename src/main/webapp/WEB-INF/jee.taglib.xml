@@ -6,9 +6,15 @@
 <facelet-taglib>
 
     <namespace>http://cz.cvut.jee/facelets</namespace>
+
     <tag>
         <tag-name>inputText</tag-name>
         <source>cz/cvut/jee/inputText.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputTextArea</tag-name>
+        <source>cz/cvut/jee/inputTextArea.xhtml</source>
     </tag>
 
     <tag>
