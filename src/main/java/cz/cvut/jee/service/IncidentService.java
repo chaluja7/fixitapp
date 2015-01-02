@@ -57,6 +57,13 @@ public interface IncidentService {
     public Incident findIncidentLazyInitialized(long id);
 
     /**
+     * finds incident with lazy initialized dependencies with access control.
+     * @param id incident id
+     * @return incident by id
+     */
+    public Incident findIncidentLazyInitializedWithAccessControl(long id);
+
+    /**
      * @return all incidents available to currently logged user
      */
     public List<Incident> findAllForCurrentUser();

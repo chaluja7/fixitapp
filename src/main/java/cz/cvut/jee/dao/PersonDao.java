@@ -6,6 +6,7 @@ import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * Person DAO.
@@ -32,4 +33,13 @@ public class PersonDao extends AbstractGenericDao<Person> {
 
         return null;
     }
+
+    @SuppressWarnings("JpaQlInspection")
+    public List<Person> findAllFromRegion(long regionId) {
+        TypedQuery<Person> query = em.createQuery("select p from Person p where region_id = :regionId", Person.class);
+        query.setParameter("regionId", regionId);
+
+        return query.getResultList();
+    }
+
 }

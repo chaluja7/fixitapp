@@ -40,4 +40,21 @@ public interface PersonService {
      * @return all persons
      */
     public List<Person> findAll();
+
+    /**
+     * @param regionId id of region
+     * @return all persons from given region
+     */
+    public List<Person> findAllFromRegion(long regionId);
+
+    /**
+     * @return all persons available to currently logged user
+     */
+    public List<Person> findAllForCurrentUser();
+
+    /**
+     * @param id person id
+     * @return person with given id with access control
+     */
+    public Person findPersonWithAccessControl(long id);
 }

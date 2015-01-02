@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @author jakubchalupa
  * @since 01.01.15
  */
-@Named(value = "loginBB")
+@Named
 public class LoginBB implements Serializable {
 
     @Inject

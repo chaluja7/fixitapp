@@ -17,6 +17,9 @@ import javax.inject.Inject;
 @Stateless
 public class SecurityUtil {
 
+    //this looks ugly :( isn`t there a better solution? User with username "anonymous" is not our friend...
+    public static final String anonymousUser = "anonymous";
+
     @Resource
     private SessionContext context;
 
@@ -24,7 +27,15 @@ public class SecurityUtil {
     private PersonDao personDao;
 
     public Person getCurrentUser() {
-        return personDao.findPersonByUsername(context.getCallerPrincipal().getName());
+        if(isLoggedIn()) {
+            return personDao.findPersonByUsername(context.getCallerPrincipal().getName());
+        }
+
+        return null;
+    }
+
+    public boolean isLoggedIn() {
+        return !context.getCallerPrincipal().getName().equals(anonymousUser);
     }
 
 }

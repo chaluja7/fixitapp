@@ -60,3 +60,16 @@
     </authentication>
   </security-domain>
   ```
+  
+* samotné přidání security-domain ale nestačí. Ještě ji potřebujeme přiřadit jako defaultní pro EJB, abychom mohli na jednotlivých beanách  používat @RolesAllowed anotace. Nalezneme tedy tag
+
+  ```xml
+  <subsystem xmlns="urn:jboss:domain:ejb3:2.0">
+  ```
+  
+* uvnitř nalezneme setování defaultní security domény a nahradíme jej naší nově vytvořenou doménou  
+
+  ```xml
+  <default-security-domain value="fixitapp-jaas-realm"/>
+  ```
+  

@@ -6,7 +6,7 @@ package cz.cvut.jee.rest.model;
  * @author jakubchalupa
  * @since 29.12.14
  */
-public class SimpleIncident extends IncidentModel {
+public class SimpleIncidentModel extends IncidentModel {
 
     private double lat;
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jee="http://cz.cvut.jee/facelets"
+                template="/WEB-INF/templates/adminDefault.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{personBB.id}"/>
+        <f:event type="preRenderView" listener="#{personBB.loadPerson}"/>
+    </f:metadata>
+
+    <ui:define name="innerContent">
+
+        <h:messages styleClass="errorJsf"/>
+        <h2><h:outputText value="#{msg['user.detail']}" /></h2>
+
+        <h:form>
+
+            <jee:inputText value="#{personBB.person.username}" title="username" label="#{msg['user.username']}"
+                    readonly="true"/>
+
+            <jee:inputText value="#{personBB.person.region eq null ? null : personBB.person.region.name}" title="region"
+                           label="#{msg['user.region']}" readonly="true"/>
+
+            <jee:inputText value="#{personBB.person.name}" title="name" label="#{msg['user.name']}"
+                           required="true" />
+
+            <jee:inputText value="#{personBB.person.surname}" title="surname" label="#{msg['user.surname']}"
+                           required="true" />
+
+
+            <h:commandButton value="#{msg['user.save']}" action="#{personBB.updatePerson}" styleClass="submitButton"/>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

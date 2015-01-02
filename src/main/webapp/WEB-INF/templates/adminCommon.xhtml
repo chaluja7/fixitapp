@@ -22,8 +22,10 @@
         <h1><h:link value="Fix it" outcome="/admin/index.xhtml" /></h1>
         <div id="topMenu">
             <ul>
-                <li><h:link value="Incidenty" outcome="/admin/incident-list.xhtml" /></li>
-                <li><h:link value="Regiony" outcome="/admin/region.xhtml" /></li>
+                <li><h:link value="#{msg['incident.menuTitle']}" outcome="/admin/incident-list.xhtml" /></li>
+                <li><h:link value="#{msg['region.menuTitle']}" outcome="/admin/region-list.xhtml" rendered="#{request.isUserInRole('SUPER_ADMIN')}"/></li>
+                <li><h:link value="#{msg['user.menuTitle']}" outcome="/admin/user-list.xhtml"
+                            rendered="#{request.isUserInRole('SUPER_ADMIN') or request.isUserInRole('REGION_ADMIN')}"/></li>
             </ul>
         </div>
 
@@ -31,10 +33,10 @@
             <ul>
                 <li>
                     #{msg['login.loggedUser']}:&nbsp;
-                    <h:link value="#{loginBB.currentUsername}" outcome="/admin/incident.xhtml?id=#{loginBB.currentUserId}" />
+                    <h:link value="#{loginBB.currentUsername}" outcome="/admin/user-edit.xhtml?id=#{loginBB.currentUserId}" />
                 </li>
                 <li>|</li>
-                <li><h:commandLink value="Odhlásit" action="#{loginBB.logout}"/></li>
+                <li><h:commandLink value="#{msg['login.logout']}" action="#{loginBB.logout}"/></li>
             </ul>
 
         </h:form>

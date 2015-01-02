@@ -2,16 +2,22 @@ package cz.cvut.jee.rest;
 
 
 import cz.cvut.jee.entity.Incident;
-import cz.cvut.jee.rest.model.SimpleIncident;
+import cz.cvut.jee.entity.Message;
+import cz.cvut.jee.rest.model.ComplexIncidentModel;
+import cz.cvut.jee.rest.model.IncidentModel;
+import cz.cvut.jee.rest.model.MessageModel;
+import cz.cvut.jee.rest.model.SimpleIncidentModel;
+import cz.cvut.jee.rest.model.consumed.NewIncidentModel;
 import cz.cvut.jee.rest.model.list.DataTableResource;
 import cz.cvut.jee.rest.model.list.ListIncident;
+import cz.cvut.jee.rest.model.response.IdResponse;
 import cz.cvut.jee.service.IncidentService;
 import cz.cvut.jee.utils.dateTime.JEEDateTimeUtils;
+import cz.cvut.jee.utils.security.RestSecureLogged;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,46 +35,88 @@ public class IncidentController {
 
     @GET
     @Produces("application/json;charset=UTF-8")
-    public List<SimpleIncident> getIncidents() {
+    public List<SimpleIncidentModel> getIncidents() {
         List<Incident> incidentList = incidentService.findAll();
 
-        List<SimpleIncident> simpleIncidentList = new ArrayList<>();
+        List<SimpleIncidentModel> modelList = new ArrayList<>();
         for(Incident incident : incidentList) {
-            SimpleIncident simpleIncident = new SimpleIncident();
+            SimpleIncidentModel model = new SimpleIncidentModel();
+            fillIncidentModel(incident, model);
+            model.setLat(incident.getLatitude());
+            model.setLon(incident.getLongitude());
 
-            simpleIncident.setId(incident.getId());
-            simpleIncident.setTitle(incident.getTitle());
-            simpleIncident.setLat(incident.getLatitude());
-            simpleIncident.setLon(incident.getLongitude());
-            simpleIncident.setState(incident.getState().name());
-            simpleIncident.setTimeOfCreation(incident.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
-            simpleIncidentList.add(simpleIncident);
+            modelList.add(model);
         }
 
-        return simpleIncidentList;
+        return modelList;
+    }
+
+    @POST
+    @Consumes("application/json;charset=UTF-8")
+    @Produces("application/json;charset=UTF-8")
+    public IdResponse saveIncident(NewIncidentModel model) {
+        Incident incident = new Incident();
+
+        incident.setTitle(model.getTitle());
+        incident.setDescription(model.getDescription());
+        incident.setLatitude(model.getLat());
+        incident.setLongitude(model.getLon());
+
+        incidentService.createIncident(incident);
+
+        return new IdResponse(incident.getId());
     }
 
     @GET
-    @Produces("application/json;charset=UTF-8")
     @Path("/list")
-    public DataTableResource<ListIncident> getIncidentsList() {
-        List<ListIncident> resourceList = new ArrayList<>();
+    @Produces("application/json;charset=UTF-8")
+    @RestSecureLogged
+    public Response getIncidentList() {
+        List<ListIncident> modelList = new ArrayList<>();
 
         for(Incident incident : incidentService.findAllForCurrentUser()) {
-            ListIncident resource = new ListIncident();
-            resource.setId(incident.getId());
-            resource.setTitle(incident.getTitle());
-            resource.setAddress(incident.getAddress());
-            resource.setState(incident.getState().name());
-            resource.setTimeOfCreation(incident.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
+            ListIncident model = new ListIncident();
+            fillIncidentModel(incident, model);
+            model.setAddress(incident.getAddress());
 
-            resourceList.add(resource);
+            modelList.add(model);
         }
 
-        return new DataTableResource<>(resourceList);
+        return Response.ok(new DataTableResource<>(modelList)).build();
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces("application/json;charset=UTF-8")
+    public ComplexIncidentModel getIncidentDetail(@PathParam("id") long id) {
+        Incident incident = incidentService.findIncidentLazyInitialized(id);
+        assert(incident != null);
 
+        ComplexIncidentModel model = new ComplexIncidentModel();
+        fillIncidentModel(incident, model);
+        model.setDescription(incident.getDescription());
+        model.setAddress(incident.getAddress());
+        model.setLat(incident.getLatitude());
+        model.setLon(incident.getLongitude());
+        model.setMessages(new ArrayList<>());
 
+        for(Message message : incident.getMessages()) {
+            MessageModel messageModel = new MessageModel();
+            messageModel.setText(message.getText());
+            messageModel.setTimeOfCreation(message.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
+            messageModel.setAuthor(message.getAuthor().getWholeName());
+
+            model.getMessages().add(messageModel);
+        }
+
+        return model;
+    }
+
+    private void fillIncidentModel(Incident incident, IncidentModel incidentModel) {
+        incidentModel.setId(incident.getId());
+        incidentModel.setTitle(incident.getTitle());
+        incidentModel.setTimeOfCreation(incident.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
+        incidentModel.setState(incident.getState().name());
+    }
 
 }

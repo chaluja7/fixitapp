@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jee="http://cz.cvut.jee/facelets"
+                template="/WEB-INF/templates/adminDefault.xhtml">
+
+    <ui:define name="innerContent">
+
+        <h:messages styleClass="errorJsf"/>
+        <h2><h:outputText value="#{msg['user.new']}" /></h2>
+
+        <h:form>
+
+            <jee:inputText value="#{personBB.person.username}" title="username" label="#{msg['user.username']}"
+                           required="true" />
+
+            <jee:inputText value="#{personBB.person.name}" title="name" label="#{msg['user.name']}"
+                           required="true" />
+
+            <jee:inputText value="#{personBB.person.surname}" title="surname" label="#{msg['user.surname']}"
+                           required="true" />
+
+
+            <h:panelGroup layout="block" styleClass="inputRow">
+                <label for="password">#{msg['user.password']}:</label>
+                <h:inputSecret value="#{personBB.person.password}" id="password" label="#{msg['user.password']}"
+                        required="true">
+
+                    <f:validator binding="#{passwordValidator}" />
+                    <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                </h:inputSecret>
+
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" styleClass="inputRow">
+                <label for="confirmPassword">#{msg['user.passConfirm']}:</label>
+                <h:inputSecret binding="#{confirmPassword}" id="confirmPassword" label="#{msg['user.passConfirm']}"
+                               required="true">
+                </h:inputSecret>
+            </h:panelGroup>
+
+            <jee:selectOne value="#{personBB.person.region}" items="#{personBB.allRegions}" title="region"
+                           label="#{msg['user.region']}" converter="#{regionConverter}"
+                           firstItemEmpty="#{request.isUserInRole('SUPER_ADMIN')}"/>
+
+            <jee:selectOne value="#{personBB.person.role}" items="#{personBB.allRoles}" title="role"
+                           label="#{msg['user.role']}" converter="#{personRoleConverter}"
+                           rendered="#{request.isUserInRole('SUPER_ADMIN')}"/>
+
+            <h:commandButton value="#{msg['user.create']}" action="#{personBB.savePerson}" styleClass="submitButton"/>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

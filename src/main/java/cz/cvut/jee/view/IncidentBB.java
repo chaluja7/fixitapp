@@ -44,7 +44,10 @@ public class IncidentBB implements Serializable {
 
     public void loadIncident() {
         if(id != null) {
-            incident = incidentService.findIncidentLazyInitialized(id);
+            incident = incidentService.findIncidentLazyInitializedWithAccessControl(id);
+            if(incident == null) {
+                throw new RuntimeException("Invalid id");
+            }
         }
     }
 

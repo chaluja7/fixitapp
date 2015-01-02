@@ -19,7 +19,7 @@ import java.util.List;
 public class Person extends AbstractEntity {
 
     @Column(unique = true)
-    @Length(min = 3)
+    @Length(min = 3, max = 255)
     @NotBlank
     private String username;
 
@@ -41,7 +41,7 @@ public class Person extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private PersonRole role;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "region_id")
     private Region region;
 
@@ -121,5 +121,9 @@ public class Person extends AbstractEntity {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getWholeName() {
+        return name + " " + surname;
     }
 }

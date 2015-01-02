@@ -14,15 +14,18 @@
     <ui:define name="innerContent">
 
         <h:messages styleClass="errorJsf"/>
-        <h2><h:outputText value="Přidání nového regionu" rendered="#{regionBB.id == null}" /></h2>
-        <h2><h:outputText value="Editace regionu" rendered="#{regionBB.id != null}" /></h2>
+        <h2><h:outputText value="#{msg['region.new']}" rendered="#{regionBB.id == null}" /></h2>
+        <h2><h:outputText value="#{msg['region.edit']}" rendered="#{regionBB.id != null}" /></h2>
 
         <h:form>
 
-            <jee:inputText value="#{regionBB.region.name}" title="name" label="#{msg['region.name']}" />
+            <jee:inputText value="#{regionBB.region.name}" title="name" label="#{msg['region.name']}" required="true" />
 
-            <h:commandButton value="Vytvořit" action="#{regionBB.saveRegion}" rendered="#{regionBB.id == null}" styleClass="submitButton"/>
-            <h:commandButton value="Uložit" action="#{regionBB.updateRegion}"  rendered="#{regionBB.id != null}" styleClass="submitButton"/>
+            <jee:selectOne value="#{regionBB.regionAdmin}" items="#{regionBB.allPersonsFromRegion}" title="regionAdmin"
+                           label="#{msg['region.admin']}" converter="#{personConverter}"/>
+
+            <h:commandButton value="#{msg['region.create']}" action="#{regionBB.saveRegion}" rendered="#{regionBB.id == null}" styleClass="submitButton"/>
+            <h:commandButton value="#{msg['region.save']}" action="#{regionBB.updateRegion}"  rendered="#{regionBB.id != null}" styleClass="submitButton"/>
 
         </h:form>
 

@@ -1,5 +1,6 @@
 package cz.cvut.jee.service;
 
+import cz.cvut.jee.entity.Person;
 import cz.cvut.jee.entity.Region;
 
 import javax.ejb.Local;
@@ -40,4 +41,27 @@ public interface RegionService {
      * @return all regions
      */
     public List<Region> findAll();
+
+    /**
+     * @return all regions available to currently logged user
+     */
+    public List<Region> findAllForCurrentUser();
+
+    /**
+     * @param regionId id of region
+     * @return admin of region with given id
+     */
+    public Person findRegionAdmin(long regionId);
+
+    /**
+     * @param regionId id of region to update
+     * @param personId new region admin id
+     */
+    public void updateRegionAdmin(long regionId, long personId);
+
+    /**
+     * @param id region id
+     * @return region by id with access control
+     */
+    public Region findRegionWithAccessControl(long id);
 }

@@ -8,14 +8,14 @@
 
 <h:body>
     <h:panelGroup layout="block" styleClass="inputRow" rendered="#{rendered == null ? true : rendered}">
-        <label for="#{title}">#{label}:</label>
+        <label for="#{title}">#{label}:<h:outputText value="*" rendered="#{required and not readonly}"/></label>
 
         <c:if test="#{readonly == null || readonly == false}">
             <h:inputText value="#{value}" id="#{title}" label="#{label}"/>
         </c:if>
-        <c:otherwise>
+        <c:if test="#{readonly}">
             <span id="#{title}">#{value}</span>
-        </c:otherwise>
+        </c:if>
 
     </h:panelGroup>
 </h:body>
