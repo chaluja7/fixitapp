@@ -1,11 +1,12 @@
 package cz.cvut.jee.rest;
 
 import cz.cvut.jee.entity.Person;
+import cz.cvut.jee.entity.PersonRole;
 import cz.cvut.jee.entity.Region;
 import cz.cvut.jee.rest.model.list.DataTableResource;
 import cz.cvut.jee.rest.model.list.ListRegion;
 import cz.cvut.jee.service.RegionService;
-import cz.cvut.jee.utils.security.RestSecureLogged;
+import cz.cvut.jee.utils.security.RestSecured;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -20,7 +21,7 @@ import java.util.List;
  * @since 02.01.15
  */
 @Path("/regions")
-@RestSecureLogged
+@RestSecured(PersonRole.SUPER_ADMIN)
 public class RegionController {
 
     @Inject

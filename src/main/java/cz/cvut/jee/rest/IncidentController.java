@@ -13,7 +13,7 @@ import cz.cvut.jee.rest.model.list.ListIncident;
 import cz.cvut.jee.rest.model.response.IdResponse;
 import cz.cvut.jee.service.IncidentService;
 import cz.cvut.jee.utils.dateTime.JEEDateTimeUtils;
-import cz.cvut.jee.utils.security.RestSecureLogged;
+import cz.cvut.jee.utils.security.RestSecured;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -70,7 +70,7 @@ public class IncidentController {
     @GET
     @Path("/list")
     @Produces("application/json;charset=UTF-8")
-    @RestSecureLogged
+    @RestSecured
     public Response getIncidentList() {
         List<ListIncident> modelList = new ArrayList<>();
 

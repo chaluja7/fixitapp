@@ -2,6 +2,7 @@ package cz.cvut.jee.utils.security;
 
 import cz.cvut.jee.dao.PersonDao;
 import cz.cvut.jee.entity.Person;
+import cz.cvut.jee.entity.PersonRole;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -36,6 +37,21 @@ public class SecurityUtil {
 
     public boolean isLoggedIn() {
         return !context.getCallerPrincipal().getName().equals(anonymousUser);
+    }
+
+    public boolean hasOneRole(PersonRole[] roles) {
+        if(!isLoggedIn() || roles.length == 0) {
+            return false;
+        }
+
+        Person currentUser = getCurrentUser();
+        for(PersonRole role : roles) {
+            if(currentUser.getRole().equals(role)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

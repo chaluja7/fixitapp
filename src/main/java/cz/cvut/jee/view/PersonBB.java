@@ -47,7 +47,6 @@ public class PersonBB implements Serializable {
     }
 
     public String savePerson() {
-        person.setPassword("a");
         if(person.getRole() == null) {
             person.setRole(PersonRole.OFFICER);
         }
