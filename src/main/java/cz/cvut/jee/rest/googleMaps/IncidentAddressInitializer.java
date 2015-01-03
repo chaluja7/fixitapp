@@ -7,6 +7,7 @@ import cz.cvut.jee.rest.exceptions.BadGPSException;
 import cz.cvut.jee.rest.googleMaps.resource.GoogleAddressResource;
 import cz.cvut.jee.service.RegionService;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import java.io.Serializable;
  * @since 03.01.15
  */
 @Named
+@Dependent
 public class IncidentAddressInitializer implements Serializable {
 
     @Inject

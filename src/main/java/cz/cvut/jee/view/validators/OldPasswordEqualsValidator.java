@@ -3,6 +3,7 @@ package cz.cvut.jee.view.validators;
 import cz.cvut.jee.utils.security.PasswordUtil;
 import cz.cvut.jee.utils.security.SecurityUtil;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
  * @since 02.01.15
  */
 @Named
+@RequestScoped
 public class OldPasswordEqualsValidator implements Validator {
 
     @Inject

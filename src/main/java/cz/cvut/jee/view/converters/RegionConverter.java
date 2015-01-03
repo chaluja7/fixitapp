@@ -3,6 +3,7 @@ package cz.cvut.jee.view.converters;
 import cz.cvut.jee.entity.Region;
 import cz.cvut.jee.service.RegionService;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -16,6 +17,7 @@ import javax.inject.Named;
  * @since 02.01.15
  */
 @Named
+@RequestScoped
 public class RegionConverter implements Converter {
 
     @Inject

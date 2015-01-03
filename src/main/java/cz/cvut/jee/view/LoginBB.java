@@ -2,6 +2,7 @@ package cz.cvut.jee.view;
 
 import cz.cvut.jee.utils.security.SecurityUtil;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,6 +15,7 @@ import java.io.Serializable;
  * @since 01.01.15
  */
 @Named
+@RequestScoped
 public class LoginBB implements Serializable {
 
     @Inject

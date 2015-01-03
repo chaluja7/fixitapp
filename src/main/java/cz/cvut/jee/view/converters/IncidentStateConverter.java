@@ -2,6 +2,7 @@ package cz.cvut.jee.view.converters;
 
 import cz.cvut.jee.entity.enums.IncidentState;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -14,6 +15,7 @@ import javax.inject.Named;
  * @since 27.11.14
  */
 @Named
+@RequestScoped
 public class IncidentStateConverter implements Converter {
 
     @Override

@@ -1,5 +1,6 @@
 package cz.cvut.jee.view.validators;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
  * @since 02.01.15
  */
 @Named
+@RequestScoped
 public class PasswordMatchValidator implements Validator {
 
     @Override

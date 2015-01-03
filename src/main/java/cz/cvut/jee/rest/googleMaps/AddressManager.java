@@ -2,6 +2,7 @@ package cz.cvut.jee.rest.googleMaps;
 
 import cz.cvut.jee.rest.googleMaps.resource.GoogleAddressResource;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -17,6 +18,7 @@ import java.io.Serializable;
  * @since 03.01.15
  */
 @Named
+@Dependent
 public class AddressManager implements Serializable {
 
     private static final String googleApiUrl = "https://maps.googleapis.com";
