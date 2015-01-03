@@ -8,13 +8,16 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.Serializable;
 
 /**
+ * Bean for handling address from google map api.
+ *
  * @author jakubchalupa
  * @since 03.01.15
  */
 @Named
-public class AddressManager {
+public class AddressManager implements Serializable {
 
     private static final String googleApiUrl = "https://maps.googleapis.com";
 

@@ -1,5 +1,6 @@
 package cz.cvut.jee.entity;
 
+import cz.cvut.jee.entity.enums.PersonRole;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 

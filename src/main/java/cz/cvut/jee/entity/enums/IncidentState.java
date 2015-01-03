@@ -1,4 +1,4 @@
-package cz.cvut.jee.entity;
+package cz.cvut.jee.entity.enums;
 
 /**
  * @author jakubchalupa

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jee="http://cz.cvut.jee/facelets"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{publicIncidentBB.id}"/>
+        <f:event type="preRenderView" listener="#{publicIncidentBB.loadIncident}"/>
+    </f:metadata>
+
+    <ui:define name="innerContent">
+
+        <h:messages styleClass="errorJsf"/>
+
+        <h2><h:outputText value="Incident č.#{publicIncidentBB.id}" /></h2>
+        <h3><h:outputText value="#{publicIncidentBB.incident.title}" /></h3>
+
+        <h:form>
+
+            <jee:inputText value="#{publicIncidentBB.incident.state.name()}" title="state" label="#{msg['incident.state']}"
+                           readonly="true" />
+
+            <jee:inputText value="#{publicIncidentBB.incident.insertedTime.toString(msg['dateTime.dateTimeFormat'])}"
+                           title="created" label="#{msg['incident.created']}" readonly="true" />
+
+            <jee:inputText value="#{publicIncidentBB.incident.address}" title="address" label="#{msg['incident.address']}"
+                           readonly="true" />
+
+            <jee:inputText value="#{publicIncidentBB.incident.description}" title="description" label="#{msg['incident.description']}"
+                           readonly="true" />
+
+            <div class="inputRow">
+                <label for="gps">#{msg['incident.gps']}:</label>
+                <span id="gps"><h:link value="#{publicIncidentBB.incident.latitude}, #{publicIncidentBB.incident.longitude}"
+                    outcome="/index.xhtml?id=#{publicIncidentBB.incident.id}" /></span>
+            </div>
+
+
+            <h3>#{msg['incident.publicMessages']}</h3>
+
+            <h:dataTable value="#{publicIncidentBB.incident.messages}" var="message">
+                <h:column>
+                    <h:outputText value="#{message.author.name} #{message.author.surname}" />
+                    <br/>
+                    <h:outputText value="#{message.insertedTime.toString(msg['dateTime.dateTimeFormat'])}" />
+                </h:column>
+
+                <h:column>
+                    <h:outputText value="#{message.text}" />
+                </h:column>
+            </h:dataTable>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

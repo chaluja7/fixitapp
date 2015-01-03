@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jee="http://cz.cvut.jee/facelets"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="lat" value="#{publicIncidentBB.lat}"/>
+        <f:viewParam name="lon" value="#{publicIncidentBB.lon}"/>
+        <f:event type="preRenderView" listener="#{publicIncidentBB.handleLatLon}"/>
+    </f:metadata>
+
+    <ui:define name="innerContent">
+
+        <h:messages styleClass="errorJsf"/>
+
+        <h2><h:outputText value="Incident č.#{publicIncidentBB.id}" /></h2>
+        <h3><h:outputText value="#{publicIncidentBB.incident.title}" /></h3>
+
+        <h:form>
+
+            <jee:inputText value="#{publicIncidentBB.incident.address}" title="address" label="#{msg['incident.address']}"
+                           readonly="true" />
+
+            <jee:inputText value="#{publicIncidentBB.incident.title}" title="title" label="#{msg['incident.title']}"
+                    required="true" />
+
+            <jee:inputTextArea value="#{publicIncidentBB.incident.description}" title="description"
+                   label="#{msg['incident.description']}" />
+
+            <h:commandButton value="#{msg['incident.create']}" action="#{publicIncidentBB.saveIncident}" styleClass="submitButton"/>
+
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

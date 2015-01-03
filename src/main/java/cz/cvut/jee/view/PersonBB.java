@@ -1,8 +1,8 @@
 package cz.cvut.jee.view;
 
 import cz.cvut.jee.entity.Person;
-import cz.cvut.jee.entity.PersonRole;
 import cz.cvut.jee.entity.Region;
+import cz.cvut.jee.entity.enums.PersonRole;
 import cz.cvut.jee.service.PersonService;
 import cz.cvut.jee.service.RegionService;
 import cz.cvut.jee.utils.security.SecurityUtil;

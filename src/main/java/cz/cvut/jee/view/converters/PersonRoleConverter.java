@@ -1,6 +1,6 @@
 package cz.cvut.jee.view.converters;
 
-import cz.cvut.jee.entity.PersonRole;
+import cz.cvut.jee.entity.enums.PersonRole;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

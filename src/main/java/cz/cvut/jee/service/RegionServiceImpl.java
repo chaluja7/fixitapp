@@ -2,8 +2,8 @@ package cz.cvut.jee.service;
 
 import cz.cvut.jee.dao.RegionDao;
 import cz.cvut.jee.entity.Person;
-import cz.cvut.jee.entity.PersonRole;
 import cz.cvut.jee.entity.Region;
+import cz.cvut.jee.entity.enums.PersonRole;
 import cz.cvut.jee.utils.security.SecurityUtil;
 
 import javax.annotation.security.PermitAll;

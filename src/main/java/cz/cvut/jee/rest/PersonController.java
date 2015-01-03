@@ -1,7 +1,7 @@
 package cz.cvut.jee.rest;
 
 import cz.cvut.jee.entity.Person;
-import cz.cvut.jee.entity.PersonRole;
+import cz.cvut.jee.entity.enums.PersonRole;
 import cz.cvut.jee.rest.model.list.DataTableResource;
 import cz.cvut.jee.rest.model.list.ListPerson;
 import cz.cvut.jee.service.PersonService;

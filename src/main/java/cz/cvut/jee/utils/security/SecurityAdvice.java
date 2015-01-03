@@ -1,6 +1,6 @@
 package cz.cvut.jee.utils.security;
 
-import cz.cvut.jee.entity.PersonRole;
+import cz.cvut.jee.entity.enums.PersonRole;
 import cz.cvut.jee.rest.exceptions.RestNotAuthorizedException;
 
 import javax.inject.Inject;

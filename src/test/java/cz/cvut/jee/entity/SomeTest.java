@@ -1,5 +1,7 @@
 package cz.cvut.jee.entity;
 
+import cz.cvut.jee.entity.enums.IncidentState;
+import cz.cvut.jee.entity.enums.PersonRole;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
@@ -41,6 +43,8 @@ public class SomeTest {
                 .create(WebArchive.class)
                 .addAsWebInfResource("web.xml")
                 .addPackage(Package.getPackage("cz.cvut.jee.entity"))
+                .addClass(PersonRole.class)
+                .addClass(IncidentState.class)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsLibraries(libs)
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");

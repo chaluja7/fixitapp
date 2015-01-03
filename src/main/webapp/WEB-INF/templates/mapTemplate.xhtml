@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/common.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="scripts">
+        <ui:insert name="scripts" />
+    </ui:define>
+
+    <ui:define name="mainContent">
+
+        <h:panelGroup layout="block" styleClass="boxWrapper" rendered="#{param['invalidIncidentCreated'] != null}">
+            <h:panelGroup layout="block" styleClass="errorBox">
+                #{msg['incident.invalidCreated']}
+            </h:panelGroup>
+        </h:panelGroup>
+
+            <ui:insert name="innerContent">
+                [Template content will be inserted here]
+            </ui:insert>
+
+    </ui:define>
+</ui:composition>

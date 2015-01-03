@@ -1,8 +1,8 @@
 package cz.cvut.jee.dao;
 
 import cz.cvut.jee.entity.Person;
-import cz.cvut.jee.entity.PersonRole;
 import cz.cvut.jee.entity.Region;
+import cz.cvut.jee.entity.enums.PersonRole;
 
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;

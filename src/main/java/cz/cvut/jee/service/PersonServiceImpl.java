@@ -4,7 +4,7 @@ import cz.cvut.jee.dao.PersonDao;
 import cz.cvut.jee.entity.Comment;
 import cz.cvut.jee.entity.Message;
 import cz.cvut.jee.entity.Person;
-import cz.cvut.jee.entity.PersonRole;
+import cz.cvut.jee.entity.enums.PersonRole;
 import cz.cvut.jee.utils.security.PasswordUtil;
 import cz.cvut.jee.utils.security.SecurityUtil;
 

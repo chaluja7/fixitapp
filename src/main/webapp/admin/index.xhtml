@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
-                template="/WEB-INF/templates/adminDefault.xhtml">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/adminMapTemplate.xhtml">
 
+    <ui:define name="scripts">
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+        <h:outputScript library="js" name="googleMapAdmin.js" />
+    </ui:define>
 
     <ui:define name="innerContent">
 
-        <h1>Fix it app administration!</h1>
-
+        <div id="map_canvas"></div>
 
     </ui:define>
 

@@ -1,7 +1,7 @@
 package cz.cvut.jee.dao;
 
 import cz.cvut.jee.entity.Incident;
-import cz.cvut.jee.entity.IncidentState;
+import cz.cvut.jee.entity.enums.IncidentState;
 
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;

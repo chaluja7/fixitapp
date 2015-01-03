@@ -1,6 +1,6 @@
 package cz.cvut.jee.view.converters;
 
-import cz.cvut.jee.entity.IncidentState;
+import cz.cvut.jee.entity.enums.IncidentState;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

@@ -2,8 +2,8 @@ package cz.cvut.jee.view;
 
 import cz.cvut.jee.entity.Comment;
 import cz.cvut.jee.entity.Incident;
-import cz.cvut.jee.entity.IncidentState;
 import cz.cvut.jee.entity.Message;
+import cz.cvut.jee.entity.enums.IncidentState;
 import cz.cvut.jee.service.CommentService;
 import cz.cvut.jee.service.IncidentService;
 import cz.cvut.jee.service.MessageService;

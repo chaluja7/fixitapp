@@ -1,7 +1,11 @@
 package cz.cvut.jee.service;
 
 import cz.cvut.jee.dao.IncidentDao;
-import cz.cvut.jee.entity.*;
+import cz.cvut.jee.entity.Incident;
+import cz.cvut.jee.entity.Message;
+import cz.cvut.jee.entity.Person;
+import cz.cvut.jee.entity.enums.IncidentState;
+import cz.cvut.jee.entity.enums.PersonRole;
 import cz.cvut.jee.utils.security.SecurityUtil;
 import org.joda.time.LocalDateTime;
 

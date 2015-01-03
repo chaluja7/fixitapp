@@ -19,6 +19,20 @@ h1, h2, h3, h4, h5 {
     position: relative;
 }
 
+#map_canvas {
+    width: 100%;
+    height: 800px;
+    color: #000000;
+}
+
+#map_canvas h3, #map_canvas a {
+    color: #000000;
+}
+
+#map_canvas a:hover {
+    font-weight: bold;
+}
+
 #footer {
     clear: both;
     text-align: center;
@@ -31,6 +45,7 @@ h1, h2, h3, h4, h5 {
     position: fixed;
     top: 0px;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     height: 60px;
     padding: 10px;
     width: 100%;
@@ -82,11 +97,6 @@ h1, h2, h3, h4, h5 {
 
 #topMenu a:hover, #topRightMenu a:hover {
     font-weight: bold;
-}
-
-#content {
-    margin-top: 65px;
-    position: relative;
 }
 
 #innerContent {
@@ -333,4 +343,8 @@ th, td {
 
 #dataTableList tbody tr:hover {
     cursor: pointer;
+}
+
+.boxWrapper {
+    padding: 1px 5px 15px 5px;
 }
