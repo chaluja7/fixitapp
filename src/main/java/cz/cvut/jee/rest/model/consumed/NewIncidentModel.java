@@ -12,9 +12,9 @@ public class NewIncidentModel {
 
     private String description;
 
-    private long lat;
+    private double lat;
 
-    private long lon;
+    private double lon;
 
     public String getTitle() {
         return title;
@@ -32,19 +32,19 @@ public class NewIncidentModel {
         this.description = description;
     }
 
-    public long getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(long lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public long getLon() {
+    public double getLon() {
         return lon;
     }
 
-    public void setLon(long lon) {
+    public void setLon(double lon) {
         this.lon = lon;
     }
 }

@@ -68,6 +68,21 @@ public class PersonBB implements Serializable {
         return "user-list?dataSaved=true&faces-redirect=true";
     }
 
+    public String changePassword() throws IllegalAccessException {
+        personService.changePassword(person.getId(), person.getPassword());
+
+        if(securityUtil.getCurrentUser().getId().equals(person.getId())) {
+            return "/login?changedPassword=true&faces-redirect=true";
+        }
+
+        return "user-list?dataSaved=true&faces-redirect=true";
+    }
+
+    public String deletePerson() throws IllegalAccessException {
+        personService.deletePerson(person.getId());
+        return "user-list?dataSaved=true&faces-redirect=true";
+    }
+
     public Map<String, Object> getAllRegions() {
         Map<String, Object> map = new HashMap<>();
 

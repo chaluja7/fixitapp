@@ -6,6 +6,7 @@ import cz.cvut.jee.entity.PersonRole;
 import cz.cvut.jee.entity.Region;
 import cz.cvut.jee.utils.security.SecurityUtil;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
 import javax.inject.Inject;
@@ -55,7 +56,7 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    @RolesAllowed("SUPER_ADMIN")
+    @PermitAll
     public List<Region> findAll() {
         return regionDao.findAll();
     }

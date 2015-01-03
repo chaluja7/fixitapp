@@ -7,15 +7,16 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import java.util.ResourceBundle;
 
 /**
- * Password validator.
+ * Password equals validator for new password.
  *
  * @author jakubchalupa
  * @since 02.01.15
  */
 @Named
-public class PasswordValidator implements Validator {
+public class PasswordMatchValidator implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
@@ -31,7 +32,7 @@ public class PasswordValidator implements Validator {
 
         if (!password.equals(confirmPassword)) {
             uiInputConfirmPassword.setValid(false);
-            throw new ValidatorException(new FacesMessage("Hesla se neshodují"));
+            throw new ValidatorException(new FacesMessage(ResourceBundle.getBundle("messages").getString("user.passwords.matchError")));
         }
     }
 }

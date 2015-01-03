@@ -22,7 +22,7 @@
             <jee:inputText value="#{regionBB.region.name}" title="name" label="#{msg['region.name']}" required="true" />
 
             <jee:selectOne value="#{regionBB.regionAdmin}" items="#{regionBB.allPersonsFromRegion}" title="regionAdmin"
-                           label="#{msg['region.admin']}" converter="#{personConverter}"/>
+                           label="#{msg['region.admin']}" converter="#{personConverter}" rendered="#{regionBB.id != null}"/>
 
             <h:commandButton value="#{msg['region.create']}" action="#{regionBB.saveRegion}" rendered="#{regionBB.id == null}" styleClass="submitButton"/>
             <h:commandButton value="#{msg['region.save']}" action="#{regionBB.updateRegion}"  rendered="#{regionBB.id != null}" styleClass="submitButton"/>

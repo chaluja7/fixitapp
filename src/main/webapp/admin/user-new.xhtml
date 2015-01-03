@@ -28,7 +28,7 @@
                 <h:inputSecret value="#{personBB.person.password}" id="password" label="#{msg['user.password']}"
                         required="true">
 
-                    <f:validator binding="#{passwordValidator}" />
+                    <f:validator binding="#{passwordMatchValidator}" />
                     <f:attribute name="confirmPassword" value="#{confirmPassword}" />
                 </h:inputSecret>
 

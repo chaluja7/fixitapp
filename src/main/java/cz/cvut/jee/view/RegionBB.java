@@ -47,8 +47,6 @@ public class RegionBB implements Serializable {
 
     public String saveRegion() {
         regionService.createRegion(region);
-        regionService.updateRegionAdmin(region.getId(), regionAdmin.getId());
-
         return "region-list?dataSaved=true&faces-redirect=true";
     }
 

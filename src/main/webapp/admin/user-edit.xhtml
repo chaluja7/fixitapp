@@ -35,5 +35,52 @@
 
         </h:form>
 
+        <h:form>
+
+            <h2><h:outputText value="#{msg['user.changePassword']}" /></h2>
+
+            <h:panelGroup layout="block" styleClass="inputRow" rendered="#{request.isUserInRole('OFFICER')}">
+                <label for="oldPassword">#{msg['user.oldPassword']}:*</label>
+                <h:inputSecret binding="#{oldPassword}" id="oldPassword" label="#{msg['user.oldPassword']}"
+                               required="true">
+                    <f:validator binding="#{oldPasswordEqualsValidator}" />
+                </h:inputSecret>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" styleClass="inputRow">
+                <label for="newPassword">#{msg['user.newPassword']}:*</label>
+                <h:inputSecret value="#{personBB.person.password}" id="newPassword" label="#{msg['user.newPassword']}"
+                               required="true">
+                    <f:validator binding="#{passwordMatchValidator}" />
+                    <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                </h:inputSecret>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" styleClass="inputRow">
+                <label for="confirmPassword">#{msg['user.passConfirm']}:*</label>
+                <h:inputSecret binding="#{confirmPassword}" id="confirmPassword" label="#{msg['user.passConfirm']}"
+                               required="true">
+                </h:inputSecret>
+            </h:panelGroup>
+
+            <h:commandButton value="#{msg['user.doChangePassword']}" action="#{personBB.changePassword}" styleClass="submitButton"/>
+
+        </h:form>
+
+        <h:form>
+
+            <h:panelGroup rendered="#{personBB.id != null and
+                    (request.isUserInRole('SUPER_ADMIN') or request.isUserInRole('REGION_ADMIN')) and
+                    personBB.id != loginBB.currentUserId}"
+                    layout="block">
+                <h:panelGroup layout="block" styleClass="dangerZone" />
+                <h:panelGroup layout="block" styleClass="centerBox">
+                    <h:commandButton value="#{msg['user.delete']}" action="#{personBB.deletePerson}" styleClass="deleteButton"
+                                     onclick="return confirm('Really?')"/>
+                </h:panelGroup>
+            </h:panelGroup>
+
+        </h:form>
+
     </ui:define>
 </ui:composition>

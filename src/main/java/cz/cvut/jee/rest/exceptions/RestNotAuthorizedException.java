@@ -1,4 +1,4 @@
-package cz.cvut.jee.utils.security.exceptions;
+package cz.cvut.jee.rest.exceptions;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

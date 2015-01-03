@@ -1,12 +1,13 @@
 package cz.cvut.jee.service;
 
 import cz.cvut.jee.dao.PersonDao;
+import cz.cvut.jee.entity.Comment;
+import cz.cvut.jee.entity.Message;
 import cz.cvut.jee.entity.Person;
 import cz.cvut.jee.entity.PersonRole;
 import cz.cvut.jee.utils.security.PasswordUtil;
 import cz.cvut.jee.utils.security.SecurityUtil;
 
-import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
@@ -51,8 +52,28 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    @DenyAll
-    public void deletePerson(long id) {
+    @RolesAllowed({"SUPER_ADMIN", "REGION_ADMIN"})
+    public void deletePerson(long id) throws IllegalAccessException {
+        Person userToDelete = personDao.find(id);
+        assert(userToDelete != null);
+
+        Person currentUser = securityUtil.getCurrentUser();
+        if(currentUser.getRole().equals(PersonRole.REGION_ADMIN) && !currentUser.getRegion().equals(userToDelete.getRegion())) {
+            throw new IllegalAccessException();
+        }
+
+        if(currentUser.equals(userToDelete)) {
+            throw new RuntimeException("You can not delete yourself");
+        }
+
+        for(Message message : userToDelete.getMessages()) {
+            message.setAuthor(null);
+        }
+
+        for(Comment comment : userToDelete.getComments()) {
+            comment.setAuthor(null);
+        }
+
         personDao.delete(id);
     }
 
@@ -101,5 +122,23 @@ public class PersonServiceImpl implements PersonService {
         }
 
         return null;
+    }
+
+    @Override
+    @RolesAllowed({"SUPER_ADMIN", "REGION_ADMIN", "OFFICER"})
+    public void changePassword(long personId, String password) throws IllegalAccessException {
+        Person currentUser = securityUtil.getCurrentUser();
+        Person userToChange = personDao.find(personId);
+        assert(userToChange != null);
+
+        if(currentUser.getRole().equals(PersonRole.SUPER_ADMIN) ||
+            (currentUser.getRole().equals(PersonRole.REGION_ADMIN) && currentUser.getRegion().equals(userToChange.getRegion())) ||
+            (currentUser.getRole().equals(PersonRole.OFFICER) && currentUser.equals(userToChange))) {
+
+            personDao.updatePassword(personId, PasswordUtil.generateHash(password));
+            return;
+        }
+
+        throw new IllegalAccessException();
     }
 }

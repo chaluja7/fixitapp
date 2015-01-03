@@ -7,7 +7,11 @@
     <ui:define name="mainContent">
         <div id="innerContent">
             <h:panelGroup layout="block" class="errorBox" rendered="#{param['error'] != null}">
-                Zadali jste špatné přihlašovací údaje. Zkuste to prosím znovu.
+                <h:outputText value="#{msg['login.error']}"/>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" class="okBox" rendered="#{param['changedPassword'] != null}">
+                <h:outputText value="#{msg['login.passwordChanged']}"/>
             </h:panelGroup>
 
             <ui:insert name="innerContent">

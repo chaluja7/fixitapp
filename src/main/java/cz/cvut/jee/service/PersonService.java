@@ -34,7 +34,7 @@ public interface PersonService {
     /**
      * @param id id of person to delete
      */
-    public void deletePerson(long id);
+    public void deletePerson(long id) throws IllegalAccessException;
 
     /**
      * @return all persons
@@ -57,4 +57,10 @@ public interface PersonService {
      * @return person with given id with access control
      */
     public Person findPersonWithAccessControl(long id);
+
+    /**
+     * @param personId id of person
+     * @param password new password
+     */
+    public void changePassword(long personId, String password) throws IllegalAccessException;
 }

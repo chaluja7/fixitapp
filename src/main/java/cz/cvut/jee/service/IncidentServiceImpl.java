@@ -79,8 +79,10 @@ public class IncidentServiceImpl implements IncidentService {
     @PermitAll
     public Incident findIncidentLazyInitialized(long id) {
         Incident incident = incidentDao.find(id);
-        incident.getMessages().size();
-        incident.getComments().size();
+        if(incident != null) {
+            incident.getMessages().size();
+            incident.getComments().size();
+        }
 
         return incident;
     }

@@ -1,7 +1,7 @@
 package cz.cvut.jee.utils.security;
 
 import cz.cvut.jee.entity.PersonRole;
-import cz.cvut.jee.utils.security.exceptions.RestNotAuthorizedException;
+import cz.cvut.jee.rest.exceptions.RestNotAuthorizedException;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;

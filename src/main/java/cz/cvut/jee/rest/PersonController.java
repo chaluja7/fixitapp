@@ -37,11 +37,9 @@ public class PersonController {
             model.setId(person.getId());
             model.setName(person.getWholeName());
             model.setUsername(person.getUsername());
-
             if(person.getRegion() != null) {
                 model.setRegion(person.getRegion().getName());
             }
-
             model.setRole(person.getRole().name());
 
             modelList.add(model);
