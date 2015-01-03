@@ -39,7 +39,7 @@
 
             <h2><h:outputText value="#{msg['user.changePassword']}" /></h2>
 
-            <h:panelGroup layout="block" styleClass="inputRow" rendered="#{request.isUserInRole('OFFICER')}">
+            <h:panelGroup layout="block" styleClass="inputRow" rendered="#{personBB.id == loginBB.currentUserId}">
                 <label for="oldPassword">#{msg['user.oldPassword']}:*</label>
                 <h:inputSecret binding="#{oldPassword}" id="oldPassword" label="#{msg['user.oldPassword']}"
                                required="true">
