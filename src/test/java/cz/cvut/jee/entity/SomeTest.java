@@ -61,6 +61,7 @@ public class SomeTest {
         em.persist(person);
         Person p = em.find(Person.class, person.getId());
 
+
         Assert.assertEquals(person.getUsername(), p.getUsername());
         Assert.assertEquals(person.getName(), p.getName());
     }
