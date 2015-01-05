@@ -26,9 +26,9 @@ jQuery(document).ready(function ($) {
         $.getJSON('../api/v1/incidents/currentUser', function(data) {
 
             $.each( data, function(i, value) {
-                var image = '/fixapp/resources/img/map_marker_reported_new.png'
+                var image = '../resources/img/map_marker_reported_new.png'
                 if(value.state == 'IN_PROGRESS') {
-                    image = '/fixapp/resources/img/map_marker_reported_in_progress.png';
+                    image = '../resources/img/map_marker_reported_in_progress.png';
                 }
 
                 var title = value.title
