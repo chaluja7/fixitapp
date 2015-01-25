@@ -40,7 +40,7 @@ public interface IncidentService {
     /**
      * @return all incidents
      */
-    public List<Incident> findAll();
+    public List<Incident> findAll(IncidentState... incidentStates);
 
     /**
      * updates incident state
@@ -66,6 +66,6 @@ public interface IncidentService {
     /**
      * @return all incidents available to currently logged user
      */
-    public List<Incident> findAllForCurrentUser();
+    public List<Incident> findAllForCurrentUser(IncidentState... incidentStates);
 
 }

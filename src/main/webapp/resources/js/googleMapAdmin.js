@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
 
         var map = new google.maps.Map(mapCanvas, mapOptions);
 
-        $.getJSON('../api/v1/incidents/currentUser', function(data) {
+        $.getJSON('../api/v1/incidents/currentUserMap', function(data) {
 
             $.each( data, function(i, value) {
                 var image = '../resources/img/map_marker_reported_new.png'

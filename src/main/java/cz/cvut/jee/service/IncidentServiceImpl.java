@@ -69,8 +69,8 @@ public class IncidentServiceImpl implements IncidentService {
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     @PermitAll
-    public List<Incident> findAll() {
-        return incidentDao.findAll();
+    public List<Incident> findAll(IncidentState... incidentStates) {
+        return incidentDao.findAll(incidentStates);
     }
 
     @Override
@@ -117,13 +117,13 @@ public class IncidentServiceImpl implements IncidentService {
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     @RolesAllowed({"SUPER_ADMIN", "REGION_ADMIN", "OFFICER"})
-    public List<Incident> findAllForCurrentUser() {
+    public List<Incident> findAllForCurrentUser(IncidentState... incidentStates) {
         Person currentUser = securityUtil.getCurrentUser();
 
         if(currentUser.getRole().equals(PersonRole.SUPER_ADMIN)) {
-            return incidentDao.findAll();
+            return incidentDao.findAll(incidentStates);
         } else if(currentUser.getRole().equals(PersonRole.REGION_ADMIN) || currentUser.getRole().equals(PersonRole.OFFICER)) {
-            return incidentDao.findAllFromRegion(currentUser.getRegion().getId());
+            return incidentDao.findAllFromRegion(currentUser.getRegion().getId(), incidentStates);
         }
 
         return new ArrayList<>();

@@ -43,8 +43,13 @@ public class IncidentController {
 
     @GET
     @Produces("application/json;charset=UTF-8")
-    public List<SimpleIncidentModel> getIncidents() {
-        List<Incident> incidentList = incidentService.findAll();
+    public List<SimpleIncidentModel> getIncidents(@QueryParam("forMap") boolean forMap) {
+        List<Incident> incidentList;
+        if(forMap) {
+            incidentList = incidentService.findAll(IncidentState.NEW, IncidentState.IN_PROGRESS);
+        } else {
+            incidentList = incidentService.findAll();
+        }
 
         List<SimpleIncidentModel> modelList = new ArrayList<>();
         for(Incident incident : incidentList) {
@@ -60,23 +65,34 @@ public class IncidentController {
     }
 
     @GET
-    @Path("/forMap")
+    @Path("/{id}")
     @Produces("application/json;charset=UTF-8")
-    public List<SimpleIncidentModel> getIncidentsForMap() {
-        List<SimpleIncidentModel> modelList = new ArrayList<>();
-
-        for(Incident incident : incidentService.findAll()) {
-            if(incident.getState().equals(IncidentState.NEW) || incident.getState().equals(IncidentState.IN_PROGRESS)) {
-                SimpleIncidentModel model = new SimpleIncidentModel();
-                fillIncidentModel(incident, model);
-                model.setLat(incident.getLatitude());
-                model.setLon(incident.getLongitude());
-
-                modelList.add(model);
-            }
+    public ComplexIncidentModel getIncidentDetail(@PathParam("id") long id) {
+        Incident incident = incidentService.findIncidentLazyInitialized(id);
+        if(incident == null) {
+            throw new RestNotFoundException();
         }
 
-        return modelList;
+        ComplexIncidentModel model = new ComplexIncidentModel();
+        fillIncidentModel(incident, model);
+        model.setDescription(incident.getDescription());
+        model.setAddress(incident.getAddress());
+        model.setLat(incident.getLatitude());
+        model.setLon(incident.getLongitude());
+        model.setMessages(new ArrayList<>());
+
+        for(Message message : incident.getMessages()) {
+            MessageModel messageModel = new MessageModel();
+            messageModel.setText(message.getText());
+            messageModel.setTimeOfCreation(message.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
+            if(message.getAuthor() != null) {
+                messageModel.setAuthor(message.getAuthor().getWholeName());
+            }
+
+            model.getMessages().add(messageModel);
+        }
+
+        return model;
     }
 
     @POST
@@ -116,55 +132,22 @@ public class IncidentController {
     }
 
     @GET
-    @Path("/currentUser")
+    @Path("/currentUserMap")
     @Produces("application/json;charset=UTF-8")
     @RestSecured
     public List<SimpleIncidentModel> getIncidentListForCurrentUser() {
         List<SimpleIncidentModel> modelList = new ArrayList<>();
 
-        for(Incident incident : incidentService.findAllForCurrentUser()) {
-            if(incident.getState().equals(IncidentState.NEW) || incident.getState().equals(IncidentState.IN_PROGRESS)) {
-                SimpleIncidentModel model = new SimpleIncidentModel();
-                fillIncidentModel(incident, model);
-                model.setLat(incident.getLatitude());
-                model.setLon(incident.getLongitude());
+        for(Incident incident : incidentService.findAllForCurrentUser(IncidentState.NEW, IncidentState.IN_PROGRESS)) {
+            SimpleIncidentModel model = new SimpleIncidentModel();
+            fillIncidentModel(incident, model);
+            model.setLat(incident.getLatitude());
+            model.setLon(incident.getLongitude());
 
-                modelList.add(model);
-            }
+            modelList.add(model);
         }
 
         return modelList;
-    }
-
-    @GET
-    @Path("/{id}")
-    @Produces("application/json;charset=UTF-8")
-    public ComplexIncidentModel getIncidentDetail(@PathParam("id") long id) {
-        Incident incident = incidentService.findIncidentLazyInitialized(id);
-        if(incident == null) {
-            throw new RestNotFoundException();
-        }
-
-        ComplexIncidentModel model = new ComplexIncidentModel();
-        fillIncidentModel(incident, model);
-        model.setDescription(incident.getDescription());
-        model.setAddress(incident.getAddress());
-        model.setLat(incident.getLatitude());
-        model.setLon(incident.getLongitude());
-        model.setMessages(new ArrayList<>());
-
-        for(Message message : incident.getMessages()) {
-            MessageModel messageModel = new MessageModel();
-            messageModel.setText(message.getText());
-            messageModel.setTimeOfCreation(message.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
-            if(message.getAuthor() != null) {
-                messageModel.setAuthor(message.getAuthor().getWholeName());
-            }
-
-            model.getMessages().add(messageModel);
-        }
-
-        return model;
     }
 
     private void fillIncidentModel(Incident incident, IncidentModel incidentModel) {

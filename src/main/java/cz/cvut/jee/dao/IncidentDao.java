@@ -8,6 +8,7 @@ import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +25,19 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
         super(Incident.class);
     }
 
+    public List<Incident> findAll(IncidentState... incidentStates) {
+        String selectQuery = "from " + type.getName();
+
+        if(incidentStates == null || incidentStates.length == 0) {
+            return em.createQuery(selectQuery, Incident.class).getResultList();
+        }
+
+        TypedQuery<Incident> query = em.createQuery(selectQuery + " where state in :states", Incident.class);
+        query.setParameter("states", Arrays.asList(incidentStates));
+
+        return query.getResultList();
+    }
+
     public void updateState(long id, IncidentState state) {
         Query query = em.createQuery("update Incident set state = :state where id = :id");
         query.setParameter("state", state);
@@ -32,10 +46,18 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
         query.executeUpdate();
     }
 
-    public List<Incident> findAllFromRegion(long regionId) {
-        TypedQuery<Incident> query = em.createQuery("from " + type.getName() + " where region_id = :regionId", Incident.class);
-        query.setParameter("regionId", regionId);
+    public List<Incident> findAllFromRegion(long regionId, IncidentState... incidentStates) {
+        String selectQuery = "from " + type.getName() + " where region_id = :regionId";
+        TypedQuery<Incident> query;
 
+        if(incidentStates == null || incidentStates.length == 0) {
+            query = em.createQuery(selectQuery, Incident.class);
+        } else {
+            query = em.createQuery(selectQuery + " and state in :states", Incident.class);
+            query.setParameter("states", Arrays.asList(incidentStates));
+        }
+
+        query.setParameter("regionId", regionId);
         return query.getResultList();
     }
 }
