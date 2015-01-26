@@ -3,6 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
@@ -10,12 +11,18 @@
     <h:panelGroup layout="block" styleClass="inputRow" rendered="#{rendered == null ? true : rendered}">
         <label for="#{title}">#{label}:<h:outputText value="*" rendered="#{required and not readonly}"/></label>
 
-        <c:if test="#{readonly == null || readonly == false}">
-            <h:inputText value="#{value}" id="#{title}" label="#{label}"/>
-        </c:if>
-        <c:if test="#{readonly}">
-            <span id="#{title}">#{value}</span>
-        </c:if>
+        <c:choose>
+            <c:when test="#{readonly == null || readonly == false}">
+                <h:inputText value="#{value}" id="#{title}" label="#{label}">
+                    <c:if test="#{validator != null}">
+                        <f:validator binding="#{validator}" />
+                    </c:if>
+                </h:inputText>
+            </c:when>
+            <c:otherwise>
+                <span id="#{title}">#{value}</span>
+            </c:otherwise>
+        </c:choose>
 
     </h:panelGroup>
 </h:body>

@@ -1,6 +1,7 @@
 package cz.cvut.jee.entity;
 
 import cz.cvut.jee.entity.enums.PersonRole;
+import cz.cvut.jee.entity.validators.CheckUsername;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,8 +21,7 @@ import java.util.List;
 public class Person extends AbstractEntity {
 
     @Column(unique = true)
-    @Length(min = 3, max = 255)
-    @NotBlank
+    @CheckUsername
     private String username;
 
     @Column(length = 255)

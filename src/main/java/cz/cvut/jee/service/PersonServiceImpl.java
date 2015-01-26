@@ -141,4 +141,11 @@ public class PersonServiceImpl implements PersonService {
 
         throw new IllegalAccessException();
     }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @PermitAll
+    public Person findPersonByUsername(String username) {
+        return personDao.findPersonByUsername(username);
+    }
 }

@@ -10,12 +10,14 @@
     <h:panelGroup layout="block" styleClass="inputRow" rendered="#{rendered == null ? true : rendered}">
         <label for="#{title}">#{label}:</label>
 
-        <c:if test="#{readonly == null || readonly == false}">
-            <h:inputTextarea value="#{value}" id="#{title}" label="#{label}"/>
-        </c:if>
-        <c:otherwise>
-            <span id="#{title}">#{value}</span>
-        </c:otherwise>
+        <c:choose>
+            <c:when test="#{readonly == null || readonly == false}">
+                <h:inputTextarea value="#{value}" id="#{title}" label="#{label}"/>
+            </c:when>
+            <c:otherwise>
+                <span id="#{title}">#{value}</span>
+            </c:otherwise>
+        </c:choose>
 
     </h:panelGroup>
 </h:body>

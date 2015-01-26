@@ -63,4 +63,10 @@ public interface PersonService {
      * @param password new password
      */
     public void changePassword(long personId, String password) throws IllegalAccessException;
+
+    /**
+     * @param username username of person
+     * @return person with given username if exists, null otherwise
+     */
+    public Person findPersonByUsername(String username);
 }

@@ -14,7 +14,7 @@
         <h:form>
 
             <jee:inputText value="#{personBB.person.username}" title="username" label="#{msg['user.username']}"
-                           required="true" />
+                           required="true" validator="#{uniqueUsernameValidator}"/>
 
             <jee:inputText value="#{personBB.person.name}" title="name" label="#{msg['user.name']}"
                            required="true" />
@@ -42,8 +42,7 @@
             </h:panelGroup>
 
             <jee:selectOne value="#{personBB.person.region}" items="#{personBB.allRegions}" title="region"
-                           label="#{msg['user.region']}" converter="#{regionConverter}"
-                           firstItemEmpty="#{request.isUserInRole('SUPER_ADMIN')}"/>
+                           label="#{msg['user.region']}" converter="#{regionConverter}"/>
 
             <jee:selectOne value="#{personBB.person.role}" items="#{personBB.allRoles}" title="role"
                            label="#{msg['user.role']}" converter="#{personRoleConverter}"
