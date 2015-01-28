@@ -103,7 +103,7 @@ public class IncidentServiceImpl implements IncidentService {
 
             return incident;
         } else if(currentUser.getRole().equals(PersonRole.REGION_ADMIN) || currentUser.getRole().equals(PersonRole.OFFICER)) {
-            if(incident.getRegion().equals(currentUser.getRegion())) {
+            if(incident.getRegion() != null && incident.getRegion().equals(currentUser.getRegion())) {
                 incident.getMessages().size();
                 incident.getComments().size();
 

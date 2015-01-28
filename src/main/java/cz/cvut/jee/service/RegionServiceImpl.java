@@ -31,7 +31,7 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    @RolesAllowed({"SUPER_ADMIN", "REGION_ADMIN", "OFFICER"})
+    @PermitAll
     public Region findRegion(long id) {
         return regionDao.find(id);
     }

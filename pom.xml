@@ -17,6 +17,9 @@
         <javaee7.web.spec.version>1.0.1.Final</javaee7.web.spec.version>
         <wildfly.version>8.1.0.Final</wildfly.version>
         <shrinkwrap.bom-version>2.1.1</shrinkwrap.bom-version>
+        <!-- Logging -->
+        <logback.version>1.1.2</logback.version>
+        <slf4j.version>1.7.7</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -32,6 +35,20 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Logging with SLF4J & LogBack -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- First declare the APIs we depend on and need for compilation -->
         <!-- All of them are provided by WildFly -->
         <dependency>
@@ -88,11 +105,10 @@
             </exclusions>
         </dependency>
 
-        <!-- Needed for running tests (you may also use TestNG) -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.17</version>
             <scope>test</scope>
         </dependency>
 
@@ -104,9 +120,10 @@
             <version>${arquillian.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
+            <groupId>org.jboss.arquillian.testng</groupId>
+            <artifactId>arquillian-testng-container</artifactId>
             <version>${arquillian.version}</version>
             <scope>test</scope>
         </dependency>
