@@ -13,6 +13,8 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeGroups;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.File;
 
 /**
@@ -23,6 +25,9 @@ import java.io.File;
  */
 @Transactional((TransactionMode.ROLLBACK))
 public abstract class AbstractArquillianTest extends Arquillian {
+
+    @PersistenceContext
+    protected EntityManager em;
 
     @Deployment
     public static Archive<?> getDeployment() {
