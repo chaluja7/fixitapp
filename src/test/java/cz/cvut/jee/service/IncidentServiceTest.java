@@ -97,8 +97,6 @@ public class IncidentServiceTest extends AbstractArquillianTest {
         
         initialList.add(incident3);
         assertFalse(retrievedList.contains(initialList));
-        
-        em.clear();
     }
 
     @Test(groups = "SUPER_ADMIN")
@@ -130,8 +128,6 @@ public class IncidentServiceTest extends AbstractArquillianTest {
 
         retrieved = incidentService.findIncidentLazyInitialized(incident.getId());
         assertEquals(retrieved.getComments().size(), incident.getComments().size());
-
-        em.clear();
     }
 
 
@@ -149,8 +145,6 @@ public class IncidentServiceTest extends AbstractArquillianTest {
 
         Incident retrieved2 = incidentService.findIncidentLazyInitializedWithAccessControl(incident2.getId());
         assertNull(retrieved2);
-        
-        em.clear();
     }
     @Test(groups = "OFFICER")
     public void testFindIncidentLazyInitializedWithAccessControlOfficer() {
@@ -167,8 +161,6 @@ public class IncidentServiceTest extends AbstractArquillianTest {
 
         Incident retrieved2 = incidentService.findIncidentLazyInitializedWithAccessControl(incident2.getId());
         assertNull(retrieved2);
-        
-        em.clear();
     }
 
 }

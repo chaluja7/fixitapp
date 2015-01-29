@@ -66,8 +66,6 @@ public class PersonServiceTest extends AbstractArquillianTest {
         assertEquals(person.getUsername(), retrieved2.getUsername());
         assertEquals(person.getPassword(), retrieved2.getPassword());
         assertEquals(person.getRole(), retrieved2.getRole());
-
-        em.clear();
     }
 
     @Test(groups = "SUPER_ADMIN")
@@ -81,8 +79,6 @@ public class PersonServiceTest extends AbstractArquillianTest {
 
         Person retrieved = personService.findPerson(person.getId());
         assertNull(retrieved);
-
-        em.clear();
     }
 
     @Test(groups = "REGION_ADMIN")
@@ -100,8 +96,6 @@ public class PersonServiceTest extends AbstractArquillianTest {
 
         Person retrieved = personService.findPerson(person.getId());
         assertNull(retrieved);
-
-        em.clear();
     }
 
     @Test(groups = "REGION_ADMIN", expectedExceptions = IllegalAccessException.class)

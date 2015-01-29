@@ -64,8 +64,6 @@ public class MessageServiceTest extends AbstractArquillianTest {
         assertEquals(message.getText(), retrieved.getText());
         assertNotNull(retrieved.getAuthor());
         assertNotNull(retrieved.getIncident());
-
-        em.clear();
     }
 
 }

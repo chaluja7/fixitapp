@@ -73,8 +73,6 @@ public class RegionServiceTest extends AbstractArquillianTest {
         List<Region> regions = regionService.findAllForCurrentUser();
         
         assertEquals(regions.size(), 6);
-        
-        em.clear();
     }
 
     @Test(groups = "REGION_ADMIN")
@@ -82,8 +80,6 @@ public class RegionServiceTest extends AbstractArquillianTest {
         List<Region> regions = regionService.findAllForCurrentUser();
         assertEquals(regions.size(), 1);
         assertEquals(regions.get(0).getName(), "Praha 1");
-        
-        em.clear();
     }
 
 }

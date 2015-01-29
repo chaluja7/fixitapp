@@ -64,8 +64,6 @@ public class CommentServiceTest extends AbstractArquillianTest {
         assertEquals(comment.getText(), retrieved.getText());
         assertNotNull(retrieved.getAuthor());
         assertNotNull(retrieved.getIncident());
-
-        em.clear();
     }
 
 }
