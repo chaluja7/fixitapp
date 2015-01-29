@@ -148,10 +148,10 @@
                 </datasource>
                 <xa-datasource jndi-name="java:jboss/datasources/AppXADS" pool-name="AppXADS" enabled="true">
                     <xa-datasource-property name="ServerName">
-                        127.5.122.130
+                        ${env.OPENSHIFT_POSTGRESQL_DB_HOST}
                     </xa-datasource-property>
                     <xa-datasource-property name="PortNumber">
-                        5432
+                        ${env.OPENSHIFT_POSTGRESQL_DB_PORT}
                     </xa-datasource-property>
                     <xa-datasource-property name="DatabaseName">
                         fixapp
@@ -163,8 +163,8 @@
                         <prefill>true</prefill>
                     </xa-pool>
                     <security>
-                        <user-name>admincfywith</user-name>
-                        <password>b4qhzcZgLbtj</password>
+                        <user-name>${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}</user-name>
+                        <password>${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}</password>
                     </security>
                 </xa-datasource>
                 <drivers>
