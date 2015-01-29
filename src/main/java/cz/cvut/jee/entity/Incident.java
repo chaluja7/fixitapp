@@ -65,6 +65,9 @@ public class Incident extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private IncidentState state;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "incident")
+    private List<InvalidIncidentReference> invalidIncidentReferenceList;
+
     public String getTitle() {
         return title;
     }

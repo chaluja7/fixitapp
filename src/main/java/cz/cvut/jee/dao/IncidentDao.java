@@ -25,6 +25,10 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
         super(Incident.class);
     }
 
+    /**
+     * @param incidentStates possible states of incidents (if null then every state)
+     * @return all incidents with given states
+     */
     public List<Incident> findAll(IncidentState... incidentStates) {
         String selectQuery = "from " + type.getName();
 
@@ -38,6 +42,11 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
         return query.getResultList();
     }
 
+    /**
+     * will update state of incident
+     * @param id incident id
+     * @param state new state
+     */
     public void updateState(long id, IncidentState state) {
         Query query = em.createQuery("update Incident set state = :state where id = :id");
         query.setParameter("state", state);
@@ -46,6 +55,11 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
         query.executeUpdate();
     }
 
+    /**
+     * @param regionId id of region
+     * @param incidentStates possible states (if null then every state)
+     * @return all incidents from given region and in given states
+     */
     public List<Incident> findAllFromRegion(long regionId, IncidentState... incidentStates) {
         String selectQuery = "from " + type.getName() + " where region_id = :regionId";
         TypedQuery<Incident> query;
@@ -58,6 +72,18 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
         }
 
         query.setParameter("regionId", regionId);
+        return query.getResultList();
+    }
+
+    /**
+     * @return all incidents for invalid incidents batch job
+     */
+    public List<Incident> findAllForInvalidIncidentsBatchJob() {
+        TypedQuery<Incident> query =
+            em.createQuery("select i from Incident i where i.state = :state and not exists " +
+                    "(select r.id from InvalidIncidentReference r where r.incident.id = i.id) order by i.id", Incident.class);
+        query.setParameter("state", IncidentState.INVALID);
+
         return query.getResultList();
     }
 }

@@ -10,6 +10,10 @@ import org.jboss.security.auth.spi.Util;
  */
 public class PasswordUtil {
 
+    /**
+     * @param password plain password
+     * @return hashed password
+     */
     public static String generateHash(String password) {
         return Util.createPasswordHash("SHA-256", "BASE64", null, null, password);
     }

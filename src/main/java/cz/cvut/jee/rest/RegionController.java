@@ -27,6 +27,9 @@ public class RegionController {
     @Inject
     protected RegionService regionService;
 
+    /**
+     * @return region list
+     */
     @GET
     @Path("/list")
     @Produces("application/json;charset=UTF-8")

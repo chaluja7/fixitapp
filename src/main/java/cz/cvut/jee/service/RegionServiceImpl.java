@@ -102,4 +102,11 @@ public class RegionServiceImpl implements RegionService {
 
         return null;
     }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @RolesAllowed("SUPER_ADMIN")
+    public Region findByName(String name) {
+        return regionDao.findRegionByName(name);
+    }
 }

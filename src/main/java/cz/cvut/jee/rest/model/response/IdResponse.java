@@ -1,6 +1,8 @@
 package cz.cvut.jee.rest.model.response;
 
 /**
+ * Simple response - will provide id of newly created record
+ *
  * @author jakubchalupa
  * @since 02.01.15
  */

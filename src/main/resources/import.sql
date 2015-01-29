@@ -24,6 +24,16 @@ INSERT INTO incident(address, title, description, insertedtime, latitude, longit
 INSERT INTO incident(address, title, description, insertedtime, latitude, longitude, state, region_id) VALUES ('náměstí u tří lvů', 'Rozpustili se voskové figuríny', '', '2014-10-22 23:41:04.777', 50.082300, 14.437900, 'NEW', 1);
 INSERT INTO incident(address, title, description, insertedtime, latitude, longitude, state, region_id) VALUES ('náměstí Svatopluka Čecha 1368/11, 101 00 Praha-Praha 10, Česká republika', 'Lavička je uplně na kaši', 'Lavička je uplně na kaši, nechápu že to ještě nikdo nevyřešil. Chodím kolem toho každý den je to fakt hrůza. Doufám že to vyřešíte co nejdříve', '2014-10-23 01:41:04.777', 50.0812390, 14.426910, 'NEW', 1);
 
+INSERT INTO incident(address, title, insertedtime, latitude, longitude, state, region_id) VALUES ('Štěpánská 795/65, 110 00 Praha-Praha 1, Česká republika', 'Díra na ulici', '2014-10-22 11:41:04.777', 50.081272, 14.426791, 'INVALID', 1);
+INSERT INTO incident(address, title, insertedtime, latitude, longitude, state, region_id) VALUES ('Nuselská 867/88, 140 00 Praha-Praha 4, Česká republika', 'zlomená značka', '2014-10-24 17:31:04.777', 50.058651, 14.448895, 'INVALID', 4);
+INSERT INTO incident(address, title, insertedtime, latitude, longitude, state, region_id) VALUES ('Rumunská 1720/12, 120 00 Praha-Praha 2, Česká republika', 'Bordel u popelnic', '2014-10-20 09:41:04.777', 50.073835, 14.431177, 'INVALID', 2);
+INSERT INTO incident(address, title, insertedtime, latitude, longitude, state, region_id) VALUES ('náměstí Svatopluka Čecha 1368/11, 101 00 Praha-Praha 10, Česká republika', 'Bezdomovci tu pijí alkohol', '2014-10-20 06:11:04.777', 50.068898, 14.460467, 'INVALID', 5);
+
+INSERT INTO incident(address, title, description, insertedtime, latitude, longitude, state, region_id) VALUES ('Stará esta s18', 'Porouchaná sušučka', '', '2014-10-22 12:41:04.777', 50.081382, 14.427800, 'INVALID', 1);
+INSERT INTO incident(address, title, description, insertedtime, latitude, longitude, state, region_id) VALUES ('Na poříčí hošánci', 'vyfocené kuřátko', '', '2014-10-22 13:41:04.777', 50.081272, 14.428791, 'INVALID', 1);
+INSERT INTO incident(address, title, description, insertedtime, latitude, longitude, state, region_id) VALUES ('U suchdola 5', 'Nějaká bezejmenná škoda', '', '2014-10-22 14:41:04.777', 50.081492, 14.426810, 'INVALID', 1);
+
+
 INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('spravce@eos.cz', 'ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=', 'Správce', 'Systému', 'SUPER_ADMIN', null);
 INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('region@eos.cz', 'ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=', 'Region', 'Admin', 'REGION_ADMIN', 1);
 INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('officer@eos.cz', 'ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=', 'Officer', 'Úředník', 'OFFICER', 1);

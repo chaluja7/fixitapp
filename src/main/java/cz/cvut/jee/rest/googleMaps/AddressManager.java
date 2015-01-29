@@ -29,14 +29,29 @@ public class AddressManager implements Serializable {
 
     private static final String gpsParam = "latlng";
 
+    /**
+     * @param lat latitude
+     * @param lon longitude
+     * @return google address response on given latlon
+     */
     public GoogleAddressResource getGoogleAddresses(double lat, double lon) {
         return getGoogleAddressResponse(lat, lon).readEntity(GoogleAddressResource.class);
     }
 
+    /**
+     * @param lat latitude
+     * @param lon longitude
+     * @return whole string of google address response on given latlon
+     */
     public String getGoogleAddressesResponseString(double lat, double lon) {
         return getGoogleAddressResponse(lat, lon).readEntity(String.class);
     }
 
+    /**
+     * @param lat latitude
+     * @param lon longitude
+     * @return response from google api on given latlon
+     */
     private Response getGoogleAddressResponse(double lat, double lon) {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(googleApiUrl).path(googleMapJsonUri).

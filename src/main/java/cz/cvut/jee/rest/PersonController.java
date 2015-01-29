@@ -26,6 +26,9 @@ public class PersonController {
     @Inject
     protected PersonService personService;
 
+    /**
+     * @return person list
+     */
     @GET
     @Path("/list")
     @Produces("application/json;charset=UTF-8")

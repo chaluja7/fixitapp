@@ -21,22 +21,40 @@ public abstract class AbstractGenericDao<T> {
         this.type = type;
     }
 
+    /**
+     * @param t entity to persist
+     */
     public void create(T t) {
         em.persist(t);
     }
 
+    /**
+     * @param t entity to update
+     * @return merged entity
+     */
     public T update(T t) {
         return em.merge(t);
     }
 
+    /**
+     * @param id id of entity
+     * @return entity with given id by type or null
+     */
     public T find(long id) {
         return em.find(type, id);
     }
 
+    /**
+     * will remove entity from database
+     * @param id id of entity to remove
+     */
     public void delete(long id) {
         em.remove(em.getReference(type, id));
     }
 
+    /**
+     * @return all entities by given type
+     */
     @SuppressWarnings("unchecked")
     public List<T> findAll() {
         return em.createQuery( "from " + type.getName()).getResultList();

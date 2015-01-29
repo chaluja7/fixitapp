@@ -28,10 +28,18 @@ public class IncidentAddressInitializer implements Serializable {
     @Inject
     protected RegionService regionService;
 
+    /**
+     * will initialize incident with common properties
+     * @param incident incident to fill properties
+     * @param lat latitude
+     * @param lon longitude
+     * @throws BadGPSException
+     */
     public void initializeIncidentWithAddressAndRegion(Incident incident, double lat, double lon) throws BadGPSException {
         incident.setLatitude(lat);
         incident.setLongitude(lon);
 
+        //ziskame adresu
         GoogleAddressResource googleAddresses = addressManager.getGoogleAddresses(lat, lon);
         if(googleAddresses.getResults().size() > 0) {
             incident.setAddress(googleAddresses.getResults().get(0).getFormatted_address());
@@ -41,6 +49,7 @@ public class IncidentAddressInitializer implements Serializable {
             throw new BadGPSException();
         }
 
+        //pokusime se incident zaradit do regionu
         String addressString = addressManager.getGoogleAddressesResponseString(lat, lon);
         for(Region region : regionService.findAll()) {
             if(addressString.contains("\"" + region.getName() + "\"")) {
@@ -49,6 +58,7 @@ public class IncidentAddressInitializer implements Serializable {
             }
         }
 
+        //urcime stav incidentu
         if(incident.getRegion() != null) {
             incident.setState(IncidentState.NEW);
         } else {

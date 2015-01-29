@@ -23,6 +23,10 @@ public class PersonDao extends AbstractGenericDao<Person> {
         super(Person.class);
     }
 
+    /**
+     * @param username persons username
+     * @return person with given username or null
+     */
     @SuppressWarnings("JpaQlInspection")
     public Person findPersonByUsername(String username) {
         TypedQuery<Person> query = em.createQuery("select p from Person p where username = :username", Person.class);
@@ -35,6 +39,10 @@ public class PersonDao extends AbstractGenericDao<Person> {
         return null;
     }
 
+    /**
+     * @param regionId id of region
+     * @return all persons from given region
+     */
     @SuppressWarnings("JpaQlInspection")
     public List<Person> findAllFromRegion(long regionId) {
         TypedQuery<Person> query = em.createQuery("select p from Person p where region_id = :regionId", Person.class);
@@ -43,6 +51,11 @@ public class PersonDao extends AbstractGenericDao<Person> {
         return query.getResultList();
     }
 
+    /**
+     * will update password
+     * @param personId id of person
+     * @param password new password (already hashed)
+     */
     @SuppressWarnings("JpaQlInspection")
     public void updatePassword(long personId, String password) {
         Query query = em.createQuery("update Person set password = :password where id = :id");

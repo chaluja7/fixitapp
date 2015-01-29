@@ -128,4 +128,11 @@ public class IncidentServiceImpl implements IncidentService {
 
         return new ArrayList<>();
     }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @RolesAllowed({"SUPER_ADMIN", "SYSTEM"})
+    public List<Incident> findAllForInvalidIncidentsBatchJob() {
+        return incidentDao.findAllForInvalidIncidentsBatchJob();
+    }
 }

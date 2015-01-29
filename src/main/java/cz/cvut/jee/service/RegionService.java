@@ -64,4 +64,10 @@ public interface RegionService {
      * @return region by id with access control
      */
     public Region findRegionWithAccessControl(long id);
+
+    /**
+     * @param name region name
+     * @return region with given name or null
+     */
+    public Region findByName(String name);
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/adminDefault.xhtml">
+
+
+    <ui:define name="innerContent">
+
+        <h3>#{msg['invalidIncident.menuTitle']}</h3>
+        <h:form>
+            <h:commandButton value="#{msg['invalidIncident.refresh']}" action="#{invalidIncidentBB.refreshTable}" />
+            <br />
+            <h:outputText value="#{msg['invalidIncident.refreshInfo']}" styleClass="inputRowHelp" />
+        </h:form>
+
+        <h:dataTable value="#{invalidIncidentBB.invalidIncidentStatisticItems}" var="item">
+            <h:column>
+                <f:facet name="header">#{msg['invalidIncident.regionName']}</f:facet>
+                <h:outputText value="#{item.regionName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">#{msg['invalidIncident.itemsCount']}</f:facet>
+                <h:outputText value="#{item.numberOfItems}" />
+            </h:column>
+        </h:dataTable>
+
+    </ui:define>
+
+</ui:composition>

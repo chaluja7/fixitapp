@@ -24,6 +24,10 @@ public class RegionDao extends AbstractGenericDao<Region> {
         super(Region.class);
     }
 
+    /**
+     * @param regionId id of region
+     * @return region admin from given region
+     */
     @SuppressWarnings("JpaQlInspection")
     public Person findRegionAdmin(long regionId) {
         TypedQuery<Person> query = em.createQuery("select p from Person p where region_id = :regionId and role = :regionRole", Person.class);
@@ -38,6 +42,11 @@ public class RegionDao extends AbstractGenericDao<Region> {
         return null;
     }
 
+    /**
+     * will update region admin (can be only one in each region)
+     * @param regionId region id
+     * @param personId new region admin id
+     */
     @SuppressWarnings("JpaQlInspection")
     public void updateRegionAdmin(long regionId, long personId) {
         Query query = em.createQuery("update Person set role = :role where region_id = :regionId");
@@ -49,6 +58,22 @@ public class RegionDao extends AbstractGenericDao<Region> {
         query2.setParameter("role", PersonRole.REGION_ADMIN);
         query2.setParameter("id", personId);
         query2.executeUpdate();
+    }
+
+    /**
+     * @param name name of region
+     * @return region with given name or null
+     */
+    @SuppressWarnings("JpaQlInspection")
+    public Region findRegionByName(String name) {
+        TypedQuery<Region> query = em.createQuery("select r from Region r where name = :name", Region.class);
+        query.setParameter("name", name);
+
+        if(query.getResultList().size() == 1) {
+            return query.getResultList().get(0);
+        }
+
+        return null;
     }
 
 }

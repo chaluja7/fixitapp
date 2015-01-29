@@ -68,4 +68,9 @@ public interface IncidentService {
      */
     public List<Incident> findAllForCurrentUser(IncidentState... incidentStates);
 
+    /**
+     * @return all incidents to be processed by invalid incidents batch job
+     */
+    public List<Incident> findAllForInvalidIncidentsBatchJob();
+
 }

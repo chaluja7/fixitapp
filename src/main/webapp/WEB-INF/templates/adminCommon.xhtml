@@ -27,6 +27,7 @@
                 <li><h:link value="#{msg['region.menuTitle']}" outcome="/admin/region-list.xhtml" rendered="#{request.isUserInRole('SUPER_ADMIN')}"/></li>
                 <li><h:link value="#{msg['user.menuTitle']}" outcome="/admin/user-list.xhtml"
                             rendered="#{request.isUserInRole('SUPER_ADMIN') or request.isUserInRole('REGION_ADMIN')}"/></li>
+                <li><h:link value="#{msg['invalidIncident.menuTitle']}" outcome="/admin/invalid-incident-list.xhtml" rendered="#{request.isUserInRole('SUPER_ADMIN')}"/></li>
             </ul>
         </div>
 

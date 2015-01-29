@@ -1,6 +1,8 @@
 package cz.cvut.jee.entity.enums;
 
 /**
+ * Possible incident states
+ *
  * @author jakubchalupa
  * @since 28.12.14
  */

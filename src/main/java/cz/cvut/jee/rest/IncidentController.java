@@ -41,6 +41,11 @@ public class IncidentController {
     @Inject
     protected IncidentAddressInitializer incidentAddressInitializer;
 
+    /**
+     * /incidents endpoint
+     * @param forMap true if wanted new and in_progress incidents only
+     * @return incidents
+     */
     @GET
     @Produces("application/json;charset=UTF-8")
     public List<SimpleIncidentModel> getIncidents(@QueryParam("forMap") boolean forMap) {
@@ -64,6 +69,11 @@ public class IncidentController {
         return modelList;
     }
 
+    /**
+     * /incidents/{id} endpoint
+     * @param id id of incident
+     * @return incident with given id or null
+     */
     @GET
     @Path("/{id}")
     @Produces("application/json;charset=UTF-8")
@@ -95,6 +105,11 @@ public class IncidentController {
         return model;
     }
 
+    /**
+     * /incidents post endpoint
+     * @param model incident to create
+     * @return id of newly created incident
+     */
     @POST
     @Consumes("application/json;charset=UTF-8")
     @Produces("application/json;charset=UTF-8")
@@ -113,6 +128,10 @@ public class IncidentController {
         return new IdResponse(incident.getId());
     }
 
+    /**
+     * /incidents/list endpoint
+     * @return incident list
+     */
     @GET
     @Path("/list")
     @Produces("application/json;charset=UTF-8")
@@ -150,6 +169,11 @@ public class IncidentController {
         return modelList;
     }
 
+    /**
+     * will copy properties from incident to incident model
+     * @param incident incident
+     * @param incidentModel incident model
+     */
     private void fillIncidentModel(Incident incident, IncidentModel incidentModel) {
         incidentModel.setId(incident.getId());
         incidentModel.setTitle(incident.getTitle());
