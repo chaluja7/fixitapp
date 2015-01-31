@@ -6,10 +6,10 @@
                 xmlns:jee="http://cz.cvut.jee/facelets"
                 template="/WEB-INF/templates/adminDefault.xhtml">
 
-    <f:metadata>
-        <f:viewParam name="id" value="#{incidentBB.id}"/>
-        <f:event type="preRenderView" listener="#{incidentBB.loadIncident}"/>
-    </f:metadata>
+    <ui:define name="scripts">
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+        <h:outputScript library="js" name="googleMapAdmin.js" />
+    </ui:define>
 
     <ui:define name="innerContent">
 
@@ -83,7 +83,7 @@
             <h:commandButton value="#{msg['incident.newComment']}" action="#{incidentBB.addComment}" styleClass="submitButton"/>
 
         </h:form>
-
+        
         <h:form>
 
             <h3>#{msg['incident.changeState']}</h3>
@@ -96,4 +96,10 @@
         </h:form>
 
     </ui:define>
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{incidentBB.id}"/>
+        <f:event type="preRenderView" listener="#{incidentBB.loadIncident}"/>
+    </f:metadata>
+    
 </ui:composition>

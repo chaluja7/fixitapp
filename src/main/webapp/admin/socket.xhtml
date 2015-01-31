@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jee="http://cz.cvut.jee/facelets"
+                template="/WEB-INF/templates/adminDefault.xhtml">
+    
+<ui:define name="scripts">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <h:outputScript library="js" name="sockets.js" />
+</ui:define>
+    
+<ui:define name="innerContent">
+
+    <h:messages styleClass="errorJsf"/>
+
+    <h2><h:outputText value="Chat" /></h2>
+
+    <!--<jee:inputText value="#{incidentBB.incident.state.name()}" title="state" label="#{msg['incident.state']}"
+                       readonly="true" />-->
+
+    <!--<jee:inputText value="" title="state" id="messageinput" />-->
+
+    <input type="text" id="messageinput"/>
+    <input type="submit" value="Start" onclick="foo()" />
+    
+    <div id="messages"></div>
+    
+</ui:define>
+
+<!--<f:metadata>
+    <f:viewParam name="id" value="#{incidentBB.id}"/>
+    <f:event type="preRenderView" listener="#{incidentBB.loadIncident}"/>
+</f:metadata>-->
+
+</ui:composition>
