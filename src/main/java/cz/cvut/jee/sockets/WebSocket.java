@@ -1,4 +1,4 @@
-package cz.cvut.jee.service.sockets;
+package cz.cvut.jee.sockets;
 
 import cz.cvut.jee.utils.security.SecurityUtil;
 
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ServerEndpoint("/websocket")
-public class WebSocketService {
+public class WebSocket {
     @Inject
     SecurityUtil securityUtil;
     

@@ -6,6 +6,11 @@
                 xmlns:jee="http://cz.cvut.jee/facelets"
                 template="/WEB-INF/templates/adminDefault.xhtml">
 
+    <f:metadata>
+        <f:viewParam name="id" value="#{personBB.id}"/>
+        <f:event type="preRenderView" listener="#{personBB.loadPerson}"/>
+    </f:metadata>
+
     <ui:define name="innerContent">
 
         <h:messages styleClass="errorJsf"/>
@@ -91,10 +96,5 @@
         </h:form>
 
     </ui:define>
-
-    <f:metadata>
-        <f:viewParam name="id" value="#{incidentBB.id}"/>
-        <f:event type="preRenderView" listener="#{incidentBB.loadIncident}"/>
-    </f:metadata>
     
 </ui:composition>
