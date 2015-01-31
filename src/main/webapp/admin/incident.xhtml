@@ -7,8 +7,8 @@
                 template="/WEB-INF/templates/adminDefault.xhtml">
 
     <f:metadata>
-        <f:viewParam name="id" value="#{personBB.id}"/>
-        <f:event type="preRenderView" listener="#{personBB.loadPerson}"/>
+        <f:viewParam name="id" value="#{incidentBB.id}"/>
+        <f:event type="preRenderView" listener="#{incidentBB.loadIncident}"/>
     </f:metadata>
 
     <ui:define name="innerContent">
