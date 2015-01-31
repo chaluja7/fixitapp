@@ -348,3 +348,12 @@ th, td {
 .boxWrapper {
     padding: 1px 5px 15px 5px;
 }
+
+.chatbox{
+    width: 580px;
+    height: 300px;
+    padding: 10px;
+    border: 2px solid;
+    overflow: scroll;
+    
+}

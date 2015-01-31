@@ -1,6 +1,5 @@
 var webSocket =
-    new WebSocket('ws://' + document.location.host + '/fixapp/websocket');
-//new WebSocket('ws://' + document.location.host + document.location.pathname.replace(/[^/]*$/, '') + 'websocket');
+    new WebSocket('ws://' + document.location.host + document.location.pathname.replace(/[^/]*$/, '') + 'websocket');
 
 webSocket.onerror = function(event) {
     onError(event)
@@ -15,13 +14,16 @@ webSocket.onmessage = function(event) {
 };
 
 function onMessage(event) {
+    var obj = JSON.parse(event.data);
+    
     document.getElementById('messages').innerHTML
-        += '<br />' + event.data;
+        += '<br />' + obj.username + ': ' + obj.text ;
+
+    var element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
 }
 
 function onOpen(event) {
-    /*document.getElementById('messages').innerHTML
-        = 'Connection established';*/
 }
 
 function onError(event) {
@@ -29,11 +31,6 @@ function onError(event) {
 }
 
 function start() {
-    //waitForSocketConnection(webSocket, function() {
-    //    webSocket.send('hello');
-    //});
-
-    //webSocket.send('hello');
     return false;
 }
 
@@ -52,7 +49,7 @@ function waitForSocketConnection(socket, callback){
         , 5);
 };
 
-function foo(){
+function sendMessage(){
     var text = document.getElementById("messageinput").value;
 
     webSocket.send(text);

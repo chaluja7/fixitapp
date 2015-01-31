@@ -1,34 +1,40 @@
 package cz.cvut.jee.sockets;
 
-import cz.cvut.jee.utils.security.SecurityUtil;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import javax.inject.Inject;
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@ServerEndpoint("/websocket")
+@ServerEndpoint("/admin/websocket")
 public class WebSocket {
     @Inject
-    SecurityUtil securityUtil;
+    MessageEncoder messageEncoder;
     
     private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
 
     @OnMessage
     public void onMessage(String message, Session session){
-        System.out.println("Message from " + securityUtil.getCurrentUser() + ": " + message);
-        sendMessageToAll(session.getUserPrincipal()+ ": " + message);
+        
+        try {
+            sendMessageToAll(
+                messageEncoder.encode(
+                    new Message(
+                        session.getUserPrincipal().getName(), StringEscapeUtils.escapeHtml4(message)
+                    )
+                )
+            );
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 
     @OnOpen
     public void onOpen(Session session){
-        System.out.println(session.getId() + " has opened a connection");
         sendMessageToAll("User has connected");
         sessions.add(session);
     }
@@ -36,7 +42,6 @@ public class WebSocket {
     @OnClose
     public void onClose(Session session){
         sessions.remove(session);
-        System.out.println("Session " +session.getUserPrincipal()+" has ended");
         sendMessageToAll("User has disconnected");
     }
 
