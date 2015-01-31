@@ -223,6 +223,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- wildfly clustering api -->
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-clustering-web-api</artifactId>
+            <version>${wildfly.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
