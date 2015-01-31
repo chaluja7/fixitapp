@@ -67,4 +67,7 @@
         <role-name>SUPER_ADMIN</role-name>
     </security-role>
 
+    <!-- enable clustering -->
+    <distributable/>
+
 </web-app>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss>
     <security-domain>fixitapp-jaas-realm</security-domain>
+
+    <!-- only 10 sessions can be active, rest will be passivated in /standalone/data/infinispan/web/default-host -->
+    <max-active-sessions>10</max-active-sessions>
 </jboss>
