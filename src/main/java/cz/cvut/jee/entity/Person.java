@@ -17,6 +17,11 @@ import java.util.List;
  */
 @Entity
 @Table(name = "person")
+@NamedQueries({
+    @NamedQuery(name = "Person.findByUsername", query = "select p from Person p where username = :username"),
+    @NamedQuery(name = "Person.findAllFromRegion", query = "select p from Person p where region_id = :regionId"),
+    @NamedQuery(name = "Person.updatePassword", query = "update Person set password = :password where id = :id")
+})
 @SuppressWarnings("JpaDataSourceORMInspection")
 public class Person extends AbstractEntity {
 

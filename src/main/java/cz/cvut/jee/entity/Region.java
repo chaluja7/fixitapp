@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "region")
+@NamedQuery(name = "Region.findByName", query = "select r from Region r where name = :name")
 @SuppressWarnings("JpaDataSourceORMInspection")
 public class Region extends AbstractEntity {
 

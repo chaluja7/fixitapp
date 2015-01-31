@@ -6,7 +6,6 @@ import cz.cvut.jee.entity.enums.IncidentState;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.Arrays;
 import java.util.List;
@@ -30,16 +29,11 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
      * @return all incidents with given states
      */
     public List<Incident> findAll(IncidentState... incidentStates) {
-        String selectQuery = "from " + type.getName();
-
         if(incidentStates == null || incidentStates.length == 0) {
-            return em.createQuery(selectQuery, Incident.class).getResultList();
+            return em.createNamedQuery("Incident.findAll", Incident.class).getResultList();
         }
 
-        TypedQuery<Incident> query = em.createQuery(selectQuery + " where state in :states", Incident.class);
-        query.setParameter("states", Arrays.asList(incidentStates));
-
-        return query.getResultList();
+        return em.createNamedQuery("Incident.findAllInStates", Incident.class).setParameter("states", Arrays.asList(incidentStates)).getResultList();
     }
 
     /**
@@ -48,11 +42,7 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
      * @param state new state
      */
     public void updateState(long id, IncidentState state) {
-        Query query = em.createQuery("update Incident set state = :state where id = :id");
-        query.setParameter("state", state);
-        query.setParameter("id", id);
-
-        query.executeUpdate();
+        em.createNamedQuery("Incident.updateState").setParameter("state", state).setParameter("id", id).executeUpdate();
     }
 
     /**
@@ -61,18 +51,12 @@ public class IncidentDao extends AbstractGenericDao<Incident> {
      * @return all incidents from given region and in given states
      */
     public List<Incident> findAllFromRegion(long regionId, IncidentState... incidentStates) {
-        String selectQuery = "from " + type.getName() + " where region_id = :regionId";
-        TypedQuery<Incident> query;
-
         if(incidentStates == null || incidentStates.length == 0) {
-            query = em.createQuery(selectQuery, Incident.class);
-        } else {
-            query = em.createQuery(selectQuery + " and state in :states", Incident.class);
-            query.setParameter("states", Arrays.asList(incidentStates));
+            return em.createNamedQuery("Incident.findAllFromRegion", Incident.class).setParameter("regionId", regionId).getResultList();
         }
 
-        query.setParameter("regionId", regionId);
-        return query.getResultList();
+        return em.createNamedQuery("Incident.findAllFromRegionInStates", Incident.class).setParameter("regionId", regionId)
+                .setParameter("states", Arrays.asList(incidentStates)).getResultList();
     }
 
     /**

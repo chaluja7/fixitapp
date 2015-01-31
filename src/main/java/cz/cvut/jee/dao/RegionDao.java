@@ -9,6 +9,7 @@ import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * Region DAO.
@@ -66,11 +67,10 @@ public class RegionDao extends AbstractGenericDao<Region> {
      */
     @SuppressWarnings("JpaQlInspection")
     public Region findRegionByName(String name) {
-        TypedQuery<Region> query = em.createQuery("select r from Region r where name = :name", Region.class);
-        query.setParameter("name", name);
+        List<Region> regionList = em.createNamedQuery("Region.findByName", Region.class).setParameter("name", name).getResultList();
 
-        if(query.getResultList().size() == 1) {
-            return query.getResultList().get(0);
+        if(regionList.size() == 1) {
+            return regionList.get(0);
         }
 
         return null;

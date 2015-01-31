@@ -7,7 +7,6 @@ import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +30,14 @@ public class InvalidIncidentReferenceDao extends AbstractGenericDao<InvalidIncid
      */
     @SuppressWarnings("JpaQlInspection")
     public InvalidIncidentReference findByIncidentId(long incidentId) {
-        TypedQuery<InvalidIncidentReference> query = em.createQuery("select i from InvalidIncidentReference i where incident_id = :incidentId", InvalidIncidentReference.class);
-        query.setParameter("incidentId", incidentId);
+        List<InvalidIncidentReference> resultList = em.createNamedQuery("InvalidIncidentReference.findByIncidentId", InvalidIncidentReference.class)
+                .setParameter("incidentId", incidentId).getResultList();
 
-        if(query.getResultList().size() == 1) {
-            return query.getResultList().get(0);
+        if(resultList.size() == 1) {
+            return resultList.get(0);
         }
 
-        return null;
+        return  null;
     }
 
     /**

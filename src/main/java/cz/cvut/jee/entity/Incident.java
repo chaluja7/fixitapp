@@ -20,6 +20,13 @@ import java.util.List;
  */
 @Entity
 @Table(name = "incident")
+@NamedQueries({
+    @NamedQuery(name = "Incident.updateState", query = "update Incident set state = :state where id = :id"),
+    @NamedQuery(name = "Incident.findAll", query = "select i from Incident i"),
+    @NamedQuery(name = "Incident.findAllInStates", query = "select i from Incident i where state in :states"),
+    @NamedQuery(name = "Incident.findAllFromRegion", query = "select i from Incident i where region_id = :regionId"),
+    @NamedQuery(name = "Incident.findAllFromRegionInStates", query = "select i from Incident i where region_id = :regionId and state in :states")
+})
 @SuppressWarnings("JpaDataSourceORMInspection")
 public class Incident extends AbstractEntity {
 

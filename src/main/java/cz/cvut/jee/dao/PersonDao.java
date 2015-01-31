@@ -5,8 +5,6 @@ import cz.cvut.jee.entity.Person;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -29,11 +27,11 @@ public class PersonDao extends AbstractGenericDao<Person> {
      */
     @SuppressWarnings("JpaQlInspection")
     public Person findPersonByUsername(String username) {
-        TypedQuery<Person> query = em.createQuery("select p from Person p where username = :username", Person.class);
-        query.setParameter("username", username);
+        List<Person> personList = em.createNamedQuery("Person.findByUsername", Person.class)
+                .setParameter("username", username).getResultList();
 
-        if(query.getResultList().size() == 1) {
-            return query.getResultList().get(0);
+        if(personList.size() == 1) {
+            return personList.get(0);
         }
 
         return null;
@@ -45,10 +43,7 @@ public class PersonDao extends AbstractGenericDao<Person> {
      */
     @SuppressWarnings("JpaQlInspection")
     public List<Person> findAllFromRegion(long regionId) {
-        TypedQuery<Person> query = em.createQuery("select p from Person p where region_id = :regionId", Person.class);
-        query.setParameter("regionId", regionId);
-
-        return query.getResultList();
+        return em.createNamedQuery("Person.findAllFromRegion", Person.class).setParameter("regionId", regionId).getResultList();
     }
 
     /**
@@ -58,10 +53,7 @@ public class PersonDao extends AbstractGenericDao<Person> {
      */
     @SuppressWarnings("JpaQlInspection")
     public void updatePassword(long personId, String password) {
-        Query query = em.createQuery("update Person set password = :password where id = :id");
-        query.setParameter("id", personId);
-        query.setParameter("password", password);
-        query.executeUpdate();
+        em.createNamedQuery("Person.updatePassword").setParameter("password", password).setParameter("id", personId).executeUpdate();
     }
 
 }

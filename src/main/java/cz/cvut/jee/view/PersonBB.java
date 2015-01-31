@@ -69,9 +69,10 @@ public class PersonBB implements Serializable {
     }
 
     public String changePassword() throws IllegalAccessException {
+        boolean changingCurrentUsersPassword = securityUtil.getCurrentUser().getId().equals(person.getId());
         personService.changePassword(person.getId(), person.getPassword());
 
-        if(securityUtil.getCurrentUser().getId().equals(person.getId())) {
+        if(changingCurrentUsersPassword) {
             return "/login?changedPassword=true&faces-redirect=true";
         }
 

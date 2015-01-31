@@ -13,6 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "invalid_incident_reference")
+@NamedQuery(name = "InvalidIncidentReference.findByIncidentId", query = "select i from InvalidIncidentReference i where incident_id = :incidentId")
 @SuppressWarnings("JpaDataSourceORMInspection")
 public class InvalidIncidentReference extends AbstractEntity {
 
