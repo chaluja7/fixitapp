@@ -1,5 +1,7 @@
-package cz.cvut.jee.sockets;
+package cz.cvut.jee.sockets.utils;
 
+import cz.cvut.jee.sockets.model.Message;
+import cz.cvut.jee.sockets.model.MessageType;
 import cz.cvut.jee.utils.dateTime.JEEDateTimeUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.joda.time.LocalDateTime;

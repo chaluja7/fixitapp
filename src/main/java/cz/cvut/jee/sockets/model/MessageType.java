@@ -1,4 +1,4 @@
-package cz.cvut.jee.sockets;
+package cz.cvut.jee.sockets.model;
 
 /**
  * Types of messages, which can be sent via websocket
@@ -12,6 +12,7 @@ package cz.cvut.jee.sockets;
  * @since 1.2.2015
  */
 public enum MessageType {
+
     CONNECTED, DISCONNECTED, MESSAGE, LOGGED_USERS
     
 }

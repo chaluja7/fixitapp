@@ -1,7 +1,13 @@
 package cz.cvut.jee.sockets;
 
+import cz.cvut.jee.sockets.model.MessageType;
+import cz.cvut.jee.sockets.utils.MessageUtil;
+
 import javax.inject.Inject;
-import javax.websocket.*;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Collections;
@@ -14,12 +20,13 @@ import java.util.Set;
  * @author Tomas Cervenka
  * @since 1.2.2015
  */
-@ServerEndpoint("/admin/websocket")
-public class WebSocket {
+@ServerEndpoint("/admin/messagewebsocket")
+public class MessageWebSocket {
+
     @Inject
     MessageUtil messageUtil;
     
-    private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
+    private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<>());
 
     /**
      * On chat message receive resend message to everyone 
@@ -28,9 +35,9 @@ public class WebSocket {
      */
     @OnMessage
     public void onMessage(String message, Session session){
-        if(message != "")
-            sendMessageToAll(
-                messageUtil.getChatMessage(message, session) );
+        if(message != null && message.length() > 0) {
+            sendMessageToAll(messageUtil.getChatMessage(message, session) );
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package cz.cvut.jee.sockets;
+package cz.cvut.jee.sockets.model;
 
 /**
  * Class representing message sent via chat (message is parsed with JSON).

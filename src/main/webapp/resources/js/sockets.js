@@ -1,5 +1,5 @@
 var webSocket =
-    new WebSocket('ws://' + document.location.host + document.location.pathname.replace(/[^/]*$/, '') + 'websocket');
+    new WebSocket('ws://' + document.location.host + document.location.pathname.replace(/[^/]*$/, '') + 'messagewebsocket');
 
 webSocket.onerror = function(event) {
     onError(event)
@@ -60,3 +60,11 @@ function sendMessage(){
 }
 
 $(document).ready(setInterval(onOpen(), 1000));
+
+$(document).ready(function() {
+    $("#messageinput").keyup(function(e) {
+        if (e.keyCode == 13) {
+            sendMessage();
+        }
+    });
+});
