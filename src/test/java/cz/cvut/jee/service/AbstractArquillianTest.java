@@ -59,7 +59,7 @@ public abstract class AbstractArquillianTest extends Arquillian {
      */
     @BeforeGroups(groups = "SUPER_ADMIN")
     protected void loginSuperAdmin() throws Exception {
-        login("spravce@eos.cz", "a");
+        login("spravce@eos.cz", "spravce");
     }
 
     /**
@@ -68,7 +68,7 @@ public abstract class AbstractArquillianTest extends Arquillian {
      */
     @BeforeGroups(groups = "REGION_ADMIN")
     protected void loginRegionAdmin() throws Exception {
-        login("region@eos.cz", "a");
+        login("region@eos.cz", "region");
     }
 
     /**
@@ -77,7 +77,7 @@ public abstract class AbstractArquillianTest extends Arquillian {
      */
     @BeforeGroups(groups = "OFFICER")
     protected void loginOfficer() throws Exception {
-        login("officer@eos.cz", "a");
+        login("officer@eos.cz", "officer");
     }
 
     /**
