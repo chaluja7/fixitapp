@@ -1,5 +1,10 @@
-var webSocket =
-    new WebSocket('ws://' + document.location.host + document.location.pathname.replace(/[^/]*$/, '') + 'messagewebsocket');
+var currentHost = document.location.host;
+
+if(currentHost.indexOf('localhost') == -1 && currentHost.indexOf('127.0.0.1') == -1) {
+    currentHost = currentHost.replace(':8080', ':8000');
+}
+
+var webSocket = new WebSocket('ws://' + currentHost + document.location.pathname.replace(/[^/]*$/, '') + 'messagewebsocket');
 
 webSocket.onerror = function(event) {
     onError(event)
