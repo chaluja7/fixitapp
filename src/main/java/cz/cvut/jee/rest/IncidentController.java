@@ -23,6 +23,7 @@ import cz.cvut.jee.utils.security.RestSecured;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,7 +114,7 @@ public class IncidentController {
     @POST
     @Consumes("application/json;charset=UTF-8")
     @Produces("application/json;charset=UTF-8")
-    public IdResponse saveIncident(NewIncidentModel model) {
+    public Response saveIncident(NewIncidentModel model) {
         Incident incident = new Incident();
         incident.setTitle(model.getTitle());
         incident.setDescription(model.getDescription());
@@ -125,7 +126,7 @@ public class IncidentController {
         }
 
         incidentService.createIncident(incident);
-        return new IdResponse(incident.getId());
+        return Response.created(URI.create("incidents/" + incident.getId())).entity(new IdResponse(incident.getId())).build();
     }
 
     /**

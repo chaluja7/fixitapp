@@ -1,5 +1,73 @@
 # A4M36JEE - Fix it! app #
 
+## Vize projektu: ##
+Aplikace slouží pro snadné nahlašování škod na veřejném majetku. Občan prostým kliknutím do mapy nahlásí incident a předá jej tak k řešení místně příslušnému městkému úřadu. Zde pověřený úředník pomocí webové aplikace škodu zanalyzuje a předá podmět k vyřešení nahlášeného incidentu.
+
+## Pojmy ##
+**Region** - geografická jednotka. Jednomu regionu přísluší právě jeden správní orgán (městký úřad), který nahlášené incidenty v daném místě řeší. Může to tedy být buď městská část (Praha 1), nebo celá obec (České Budějovice).
+
+**Incident** - hlášená jednotka (např. černá skládka, škoda na veřejném majetku…)
+
+## Funkční požadavky ##
+#### Aplikace pro hlášení incidentů ####
+* Zvolení lokace incidentu
+* Vyplnění informací o hlášeném incidentu
+* Odeslání incidentu na server
+* Zobrazení všech incidentů
+* Zobrazení detailu incidentu
+* Veřejné REST API pro nahlášení incidentu, zobrazení všech incidentů a zobrazení detailu incidentu
+
+#### Aplikace pro správu incidentů ####
+* Přihlášení do systému
+* Zobrazení všech incidentů
+* Změna stavu incidentu
+* Přidání vyjádření k incidentu
+* Noční zpracování nevalidních incidentů (vytvoření statistiky)
+
+## Ostatní požadavky ##
+* Systém bude rozlišovat 4 úrovně oprávnění (každá další role v seznamu automaticky přebírá oprávnění všech rolí vyjmenovaných dříve)
+ * **Nepřihlášený uživatel** - přidává a zobrazuje nahlášené incidenty
+ * **Úředník (OFFICER)** - v rámci svého regionu řeší nahlášné incidenty (změna stavu, přidání vyjádření)
+ * **Regionální admin (REGION_ADMIN)** - spravuje úředníky v rámci svého regionu
+ * **Super admin (SUPER_ADMIN)** - spravuje regiony a jejich regionální adminy
+* Aplikace bude nasazena na OpenShiftu
+* Aplikace bude testovatelná
+* Aplikaci bude možné nasadit v clusteru dvou uzlů v doménové konfiguraci
+* Aplikace bude vystavovat veřejné REST API pro komunikaci mezi systémy
+
+## Architektura ##
+Architektura samotné aplikace sestává z vrstev doporučovaných pro typickou aplikaci psanou ve frameworku Spring. Ke standardní třívrstvé architektuře JEE aplikací tedy navíc přidává i DAO vrstvu. 
+
+*Poznámka autora: O tomto architektonickém rozhodnutí rád rozpoutám debatu. Stejně tak rád povedu debatu na téma, zda je pro EJB servicy vhodné a doporučené psát interfacy, pokud je již od začátku zjevné, že existovat bude stejně jen jedna implementace. Z tohoto důvodu je v aplikaci  zcela záměrně u tříd servisní vrstvy použito interfaců, zatímco u DAO vrstvy interfacy chybí.*
+
+![Architektura aplikace](doc/fixAppArchitecture.png)
+
+
+### Datový model ###
+
+![Datový model](doc/fixAppModel.png)
+
+
+## Použité technologie ##
+* Aplikační server WildFly 8.1
+* Maven 3.2
+* EJB 3.2
+* CDI	1.1
+* JPA 2.1
+* Hibernate validator 5.0.1
+* JAX-RS 2.0
+* JSF 2.2
+* Batching API 1.0
+* Arquillian 1.1.5
+* TestNG 6.8
+* SLF4J 1.7.7
+* PostgreSQL
+
+## Rozšiřitelnost do budoucna ##
+Na aplikaci je samozřejmě stále co zlepšovat. Již nyní jsou nám známy vhodná rozšíření stávající implementace:
+* Možnost přidávat obrázky hlášených incidentů
+* Tvorba mobilních aplikací, které se budou připojovat na veřejné REST API a pomocí kterých bude možné nahlašovat incidenty z mobilních zařízení
+
 ## Příprava projektu: ##
 
 * příprava projektu je relevantní pro aplikační server **WildFly-8.1.0.Final**
@@ -96,5 +164,14 @@
   ```
 
 * defaultně nyní aplikace poběží na portech *8080* a *8180*
+
+## Openshift ##
+* aplikace je dostupná na: [http://fixapp-chaluja7.rhcloud.com/](http://fixapp-chaluja7.rhcloud.com/)
+* zřízené účty pro přístup
+ * [spravce@eos.cz, spravce] - SUPER_ADMIN
+ * [region@eos.cz, region] - REGION_ADMIN
+ * [officer@eos.cz, officer] - OFFICER
+* [REST API](http://fixapp-chaluja7.rhcloud.com/api/v1/)
+* [Dokumentace REST API na apiary](http://docs.fixapppublicapi.apiary.io/#)
 
   
