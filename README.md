@@ -45,7 +45,7 @@ Architektura samotné aplikace sestává z vrstev doporučovaných pro typickou 
 
 ### Datový model ###
 
-![Datový model](doc/fixAppModel.png)
+![Datový model](doc/fixappModel.png)
 
 
 ## Použité technologie ##
