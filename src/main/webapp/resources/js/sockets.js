@@ -15,12 +15,29 @@ webSocket.onmessage = function(event) {
 
 function onMessage(event) {
     var obj = JSON.parse(event.data);
+    var chat = document.getElementById('messages');
     
-    document.getElementById('messages').innerHTML
-        += '<br />' + obj.username + ': ' + obj.text ;
+    // adds message to chat window
+    chat.innerHTML += '<br />['+obj.time + '] ';
+    
+    if(obj.type == 'CONNECTED'){
+        chat.innerHTML += 'Zalogoval se uživatel ' + obj.username;
+    }else if(obj.type == 'DICONNECTED'){
+        chat.innerHTML += 'Odlogoval se uživatel ' + obj.username;
+    }else if(obj.type == 'MESSAGE'){
+        chat.innerHTML += '<b>' + obj.username + ':</b> ' + obj.text;
+    }else if(obj.type == 'LOGGED_USERS'){
+        chat.innerHTML += 'Zalogování jsou: ' + obj.text;
+    }else{
+        chat.innerHTML += 'Odlogoval se uživatel ' + obj.username;
+    }
 
-    var element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight;
+    // scrolls down
+    chat.scrollTop = chat.scrollHeight;
+
+    // clears text input with sent message
+    var messageInput = document.getElementById("messageinput");
+    messageInput.value = "";
 }
 
 function onOpen(event) {
@@ -34,26 +51,12 @@ function start() {
     return false;
 }
 
-function waitForSocketConnection(socket, callback){
-    setTimeout(
-        function(){
-            if (socket.readyState === 1) {
-                if(callback !== undefined){
-                    callback();
-                }
-                return;
-            } else {
-                waitForSocketConnection(socket,callback);
-            }
-        }
-        , 5);
-};
-
 function sendMessage(){
     var text = document.getElementById("messageinput").value;
-
-    webSocket.send(text);
-
+    
+    if(text != "") {
+        webSocket.send(text);
+    }
 }
 
 $(document).ready(setInterval(onOpen(), 1000));

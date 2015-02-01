@@ -1,7 +1,5 @@
 package cz.cvut.jee.sockets;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import javax.inject.Inject;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -10,41 +8,90 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Creates websocket and reacts on it's events
+ *
+ * @author Tomas Cervenka
+ * @since 1.2.2015
+ */
 @ServerEndpoint("/admin/websocket")
 public class WebSocket {
     @Inject
-    MessageEncoder messageEncoder;
+    MessageUtil messageUtil;
     
     private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
 
+    /**
+     * On chat message receive resend message to everyone 
+     * @param message Text of received chat message
+     * @param session Session from which we've got the message
+     */
     @OnMessage
     public void onMessage(String message, Session session){
-        
-        try {
+        if(message != "")
             sendMessageToAll(
-                messageEncoder.encode(
-                    new Message(
-                        session.getUserPrincipal().getName(), StringEscapeUtils.escapeHtml4(message)
-                    )
-                )
-            );
-        } catch (EncodeException e) {
-            e.printStackTrace();
-        }
+                messageUtil.getChatMessage(message, session) );
     }
 
+    /**
+     * When user is connected, tell it to everyone <br>
+     * Informs that user about connected users     
+     * @param session Session from which websocket was opened
+     */
     @OnOpen
     public void onOpen(Session session){
-        sendMessageToAll("User has connected");
+        
+        // updates everybody
+        sendMessageToAll(
+            messageUtil.getGeneralMessage("", MessageType.CONNECTED, session)
+        );
+
+        String loggedUsers = getLogged();
+        
+        // tells user, who is already logged
+        if(sessions.size() > 0)
+            try {
+                session.getBasicRemote().sendText(
+                        messageUtil.getGeneralMessage(loggedUsers, MessageType.LOGGED_USERS, session)
+                );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         sessions.add(session);
     }
-
+    
+    /**
+     * When user is disconnected, tell it to everyone <br>
+     * @param session Session from which websocket was closed
+     */
     @OnClose
     public void onClose(Session session){
         sessions.remove(session);
-        sendMessageToAll("User has disconnected");
+        
+        sendMessageToAll(
+                messageUtil.getGeneralMessage("", MessageType.DISCONNECTED, session)
+        );
     }
 
+    /**
+     * @return String with usernames of users currently using chat.
+     */
+    private String getLogged(){
+        String result = "";
+        
+        for(Session s : sessions){
+            result += "[" + s.getUserPrincipal().getName() + "] ";
+        }
+        
+        return result;
+        
+    }
+
+    /**
+     * Sends message to all users on chat.
+     * @param message Text we want to send.
+     */
     private void sendMessageToAll(String message){
         for(Session s : sessions){
             try {
