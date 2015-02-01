@@ -31,6 +31,7 @@ public class Person extends AbstractEntity {
 
     @Column(length = 255)
     @NotBlank
+    @Length(min = 6)
     private String password;
 
     @Column

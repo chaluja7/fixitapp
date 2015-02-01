@@ -34,9 +34,9 @@ INSERT INTO incident(address, title, description, insertedtime, latitude, longit
 INSERT INTO incident(address, title, description, insertedtime, latitude, longitude, state, region_id) VALUES ('U suchdola 5', 'Nějaká bezejmenná škoda', '', '2014-10-22 14:41:04.777', 50.081492, 14.426810, 'INVALID', 1);
 
 
-INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('spravce@eos.cz', 'ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=', 'Správce', 'Systému', 'SUPER_ADMIN', null);
-INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('region@eos.cz', 'ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=', 'Region', 'Admin', 'REGION_ADMIN', 1);
-INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('officer@eos.cz', 'ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=', 'Officer', 'Úředník', 'OFFICER', 1);
+INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('spravce@eos.cz', '3PB7skoIkZ/gbONsrtcdPUYNxGBG0Wsds/3HzOLAiiI=', 'Správce', 'Systému', 'SUPER_ADMIN', null);
+INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('region@eos.cz', 'xpfSmBv0FlaaFs+83sFUK1OY88x30rkFgZqpnEbs9vY=', 'Region', 'Admin', 'REGION_ADMIN', 1);
+INSERT INTO person(username, password, name, surname, role, region_id) VALUES ('officer@eos.cz', '1x8L1iPl4LQOtLQ1UJHQV9XkBkTh5s2hazMhP4rnVB8=', 'Officer', 'Úředník', 'OFFICER', 1);
 
 INSERT INTO message(insertedtime, text, person_id, incident_id) VALUES('2014-10-25 19:30:04.777', 'Děkujeme za nahlášení, koukneme se na to.', 2, 1);
 INSERT INTO message(insertedtime, text, person_id, incident_id) VALUES('2014-10-26 18:30:04.777', 'Bylo vyřešeno snad.', 2, 1);
