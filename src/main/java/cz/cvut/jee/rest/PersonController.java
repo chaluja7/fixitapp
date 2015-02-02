@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Person endpoint controller
+ *
  * @author jakubchalupa
  * @since 02.01.15
  */

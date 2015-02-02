@@ -8,10 +8,10 @@ package cz.cvut.jee.utils.dateTime;
  */
 public class JEEDateTimeUtils {
 
-    public static final String dateTimePattern = "dd.MM.yyyy HH:mm";
+    public static final String DATE_TIME_PATTERN = "dd.MM.yyyy HH:mm";
 
-    public static final String datePattern = "dd.MM.yyyy";
+    public static final String DATE_PATTERN = "dd.MM.yyyy";
 
-    public static final String timePattern = "HH:mm";
+    public static final String TIME_PATTERN = "HH:mm";
 
 }

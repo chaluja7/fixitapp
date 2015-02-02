@@ -14,6 +14,12 @@ $.extend(true, $.fn.dataTable.defaults, {
             "sFirst": "První",
             "sLast": "Poslední"
         }
+    },
+    "fnCreatedRow": function ( row, data, index ) {
+        var i = 0;
+        $.each(data, function( key, value ) {
+            $('td', row).eq(i++).text(value);
+        });
     }
 });
 

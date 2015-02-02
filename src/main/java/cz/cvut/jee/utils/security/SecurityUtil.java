@@ -27,6 +27,9 @@ public class SecurityUtil {
     @Inject
     private PersonDao personDao;
 
+    /**
+     * @return currently logged user
+     */
     public Person getCurrentUser() {
         if(isLoggedIn()) {
             return personDao.findPersonByUsername(context.getCallerPrincipal().getName());
@@ -35,10 +38,17 @@ public class SecurityUtil {
         return null;
     }
 
+    /**
+     * @return true if caller is logged in
+     */
     public boolean isLoggedIn() {
         return !context.getCallerPrincipal().getName().equals(anonymousUser);
     }
 
+    /**
+     * @param roles array of roles
+     * @return true if user is logged in and has at least one of role from argument
+     */
     public boolean hasOneRole(PersonRole[] roles) {
         if(!isLoggedIn() || roles.length == 0) {
             return false;

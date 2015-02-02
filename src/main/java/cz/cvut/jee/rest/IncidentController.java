@@ -95,7 +95,7 @@ public class IncidentController {
         for(Message message : incident.getMessages()) {
             MessageModel messageModel = new MessageModel();
             messageModel.setText(message.getText());
-            messageModel.setTimeOfCreation(message.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
+            messageModel.setTimeOfCreation(message.getInsertedTime().toString(JEEDateTimeUtils.DATE_TIME_PATTERN));
             if(message.getAuthor() != null) {
                 messageModel.setAuthor(message.getAuthor().getWholeName());
             }
@@ -178,7 +178,7 @@ public class IncidentController {
     private void fillIncidentModel(Incident incident, IncidentModel incidentModel) {
         incidentModel.setId(incident.getId());
         incidentModel.setTitle(incident.getTitle());
-        incidentModel.setTimeOfCreation(incident.getInsertedTime().toString(JEEDateTimeUtils.dateTimePattern));
+        incidentModel.setTimeOfCreation(incident.getInsertedTime().toString(JEEDateTimeUtils.DATE_TIME_PATTERN));
         incidentModel.setState(incident.getState().name());
     }
 

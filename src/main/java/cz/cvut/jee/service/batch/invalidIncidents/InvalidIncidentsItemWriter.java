@@ -20,6 +20,11 @@ public class InvalidIncidentsItemWriter extends AbstractItemWriter {
     @Inject
     private InvalidIncidentReferenceService invalidIncidentReferenceService;
 
+    /**
+     * will persist items
+     * @param items items to persist
+     * @throws Exception
+     */
     @Override
     public void writeItems(List<Object> items) throws Exception {
         for(Object item : items) {

@@ -42,7 +42,7 @@ public class MessageUtil {
      */
     public String getChatMessage(String messageInput, Session session){
         Message preparedMessage = new Message(StringEscapeUtils.escapeHtml4(messageInput), MessageType.MESSAGE);
-        preparedMessage.setTime(new LocalDateTime().toString(JEEDateTimeUtils.timePattern));
+        preparedMessage.setTime(new LocalDateTime().toString(JEEDateTimeUtils.TIME_PATTERN));
         preparedMessage.setUsername(session.getUserPrincipal().getName());
 
         try {
@@ -63,7 +63,7 @@ public class MessageUtil {
      */
     public String getGeneralMessage(String messageInput, MessageType messageType, Session session){
         Message preparedMessage = new Message(messageInput, messageType);
-        preparedMessage.setTime(new LocalDateTime().toString(JEEDateTimeUtils.timePattern));
+        preparedMessage.setTime(new LocalDateTime().toString(JEEDateTimeUtils.TIME_PATTERN));
         preparedMessage.setUsername(session.getUserPrincipal().getName());
 
         try {

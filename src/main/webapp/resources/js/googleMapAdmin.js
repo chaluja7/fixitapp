@@ -31,7 +31,7 @@ jQuery(document).ready(function ($) {
                     image = '../resources/img/map_marker_reported_in_progress.png';
                 }
 
-                var title = value.title
+                var title = escapeHtml(value.title);
                 if(title.length > 20) {
                     title = title.substring(0,20) + "...";
                 }

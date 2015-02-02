@@ -25,6 +25,10 @@ public class InvalidIncidentsItemReader extends AbstractItemReader {
 
     private Integer recordNumber = 0;
 
+    /**
+     * will collect data to read
+     * @param checkpoint checkpoint
+     */
     @Override
     public void open(Serializable checkpoint) {
         incidentIterator = incidentService.findAllForInvalidIncidentsBatchJob().iterator();
@@ -38,6 +42,10 @@ public class InvalidIncidentsItemReader extends AbstractItemReader {
         }
     }
 
+    /**
+     * @return next item from collection
+     * @throws Exception
+     */
     @Override
     public Incident readItem() throws Exception {
         if(incidentIterator.hasNext()) {
@@ -48,6 +56,10 @@ public class InvalidIncidentsItemReader extends AbstractItemReader {
         return null;
     }
 
+    /**
+     * @return number of last processed item
+     * @throws Exception
+     */
     @Override
     public Serializable checkpointInfo() throws Exception {
         return recordNumber;

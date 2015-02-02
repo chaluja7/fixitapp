@@ -23,10 +23,15 @@ public class InvalidIncidentsItemProcessor implements ItemProcessor {
 
     private static final String POSSIBLE_IDENTIFIER_2 = "sublocality_level_1";
 
-
     @Inject
     private AddressManager addressManager;
 
+    /**
+     *
+     * @param item item to process (Incident)
+     * @return Invalid incident reference to persist or null
+     * @throws Exception
+     */
     @Override
     public InvalidIncidentReference processItem(Object item) throws Exception {
         Incident incident = (Incident) item;
