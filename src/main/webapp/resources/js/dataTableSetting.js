@@ -16,9 +16,9 @@ $.extend(true, $.fn.dataTable.defaults, {
         }
     },
     "fnCreatedRow": function ( row, data, index ) {
-        var i = 0;
-        $.each(data, function( key, value ) {
-            $('td', row).eq(i++).text(value);
+        //prevent XSS
+        $('td',row).each(function() {
+            $(this).text($(this).html());
         });
     }
 });
